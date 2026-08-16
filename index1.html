@@ -348,29 +348,6 @@
     border:1px solid var(--line); color:var(--slate); padding:4px 10px; border-radius:100px;
   }
 
-  /* ---------- MACHINES A LA UNE ---------- */
-  .featured-machines{background:#081f39; color:#fff; overflow:hidden;}
-  .featured-machines::before{content:''; position:absolute; width:640px; height:640px; border-radius:50%; background:radial-gradient(circle,rgba(46,139,255,.25),transparent 68%); top:-360px; right:-250px;}
-  .featured-machines .container{position:relative; z-index:1;}
-  .featured-machines .section-tag{color:#82bcff;}
-  .featured-machines .section-head h2{color:#fff;}
-  .featured-machines .section-head p{color:rgba(255,255,255,.72);}
-  .machine-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
-  .machine-card{min-height:390px; position:relative; overflow:hidden; border-radius:18px; border:1px solid rgba(255,255,255,.16); background:#102d4d; display:flex; align-items:flex-end; transition:transform .35s var(--ease), border-color .35s, box-shadow .35s;}
-  .machine-card:hover{transform:translateY(-8px); border-color:rgba(130,188,255,.8); box-shadow:0 20px 42px rgba(0,0,0,.28);}
-  .machine-card img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.86; transition:transform .6s var(--ease), opacity .35s;}
-  .machine-card:hover img{transform:scale(1.06); opacity:1;}
-  .machine-card::after{content:''; position:absolute; inset:0; background:linear-gradient(180deg,rgba(4,19,36,.02) 30%,rgba(4,19,36,.92) 100%);}
-  .machine-card-content{position:relative; z-index:1; width:100%; padding:24px;}
-  .machine-type{display:inline-flex; padding:5px 10px; border-radius:99px; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.25); font-family:'JetBrains Mono',monospace; font-size:.66rem; letter-spacing:.04em; text-transform:uppercase; margin-bottom:10px;}
-  .machine-card h3{font-size:1.35rem; margin-bottom:6px; color:#fff;}
-  .machine-card p{color:rgba(255,255,255,.78); font-size:.88rem; margin-bottom:14px; max-width:300px;}
-  .machine-link{display:inline-flex; align-items:center; gap:8px; color:#a9d1ff; font-weight:700; font-size:.86rem;}
-  .machine-link i{transition:transform .25s var(--ease);}
-  .machine-card:hover .machine-link i{transform:translateX(4px);}
-  @media (max-width:960px){.machine-grid{grid-template-columns:repeat(2,1fr);}}
-  @media (max-width:620px){.machine-grid{grid-template-columns:1fr;}.machine-card{min-height:350px;}}
-
   /* ---------- CONSUMABLES ---------- */
   .consumables-wrap{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
   .consum-card{
@@ -765,9 +742,9 @@
   <div class="container hero-inner">
     <div class="hero-copy">
       <!-- APRÈS (avec data-i18n) -->
-      <div class="eyebrow"><span class="dot"></span> Solutions de codage &amp; marquage industriel — Maroc</div>
-      <h1>La bonne machine pour <span class="accent">chaque ligne</span> de production.</h1>
-      <p class="lead">Découvrez les dernières solutions RM MARK : jet d'encre, laser, étiquetage et machines portatives pour une traçabilité nette, rapide et durable.</p>
+      <div class="eyebrow"><span class="dot"></span> <span data-i18n="hero.eyebrow">Marquage &amp; codage industriel — Maroc</span></div>
+      <h1><span data-i18n="hero.title_1">On imprime la</span> <span class="accent" data-i18n="hero.title_accent">traçabilité</span> <span data-i18n="hero.title_2">de votre marque, à chaque cadence.</span></h1>
+      <p class="lead" data-i18n="hero.lead">Depuis plus de 15 ans, RM MARK conçoit des solutions de marquage industriel — du jet d'encre à la technologie laser — pour identifier et tracer vos produits, sur tout support, à toute vitesse.</p>
       <div class="mark-strip" aria-hidden="true">
         <div class="mark-track"></div>
         <div class="mark-fill"></div>
@@ -776,20 +753,20 @@
       </div>
 
       <div class="hero-ctas">
-        <a href="#machines" class="btn btn-primary"><i class="fa-solid fa-boxes-stacked"></i> Voir les machines</a>
-        <a href="#contact" class="btn btn-ghost"><i class="fa-solid fa-phone"></i> Parler à un expert</a>
+        <a href="#solutions" class="btn btn-primary"><i class="fa-solid fa-layer-group"></i> Nos solutions</a>
+        <a href="#contact" class="btn btn-ghost"><i class="fa-solid fa-phone"></i> Assistance technique</a>
       </div>
     </div>
 
     <div class="hero-visual">
       <div class="pipe-card">
         <div class="pipe-visual">
-    <img src="images/products/l6-handheld/Ej1010r/EJ1010R.jpg" alt="Machine portative EJ1010R de RM MARK" style="width:100%; border-radius:14px; height:auto; max-height:280px; object-fit:cover;">
+    <img src="images/page1_img1.jpeg" alt="Solutions de marquage RM MARK" style="width:100%; border-radius:14px; height:auto; max-height:280px; object-fit:cover;">
 </div>
         <div class="stat-row">
           <div><div class="stat-num">15+</div><div class="stat-label">Ans d'expertise</div></div>
-          <div><div class="stat-num">6</div><div class="stat-label">Gammes machines</div></div>
-          <div><div class="stat-num">Maroc</div><div class="stat-label">Support terrain</div></div>
+          <div><div class="stat-num">280mm</div><div class="stat-label">Hauteur max.</div></div>
+          <div><div class="stat-num">300/min</div><div class="stat-label">Cadence</div></div>
         </div>
       </div>
     </div>
@@ -820,43 +797,6 @@
   </div>
 </div>
 
-
-<!-- ===================== MACHINES A LA UNE ===================== -->
-<section class="section featured-machines" id="machines">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="section-tag">Nouveautés &amp; meilleures ventes</span>
-      <h2>Des machines pensées pour votre cadence.</h2>
-      <p>Une sélection de solutions fiables pour imprimer dates, lots, codes-barres, QR codes et marquages permanents sur vos produits.</p>
-    </div>
-    <div class="machine-grid">
-      <a class="machine-card reveal" href="products/l1/l1_ci8550.html">
-        <img src="images/products/l1-inkjet_coding/ci8550/ci8550.jpg" alt="CI8550, imprimante jet d'encre">
-        <div class="machine-card-content"><span class="machine-type">Jet d'encre industriel</span><h3>CI8550</h3><p>Marquage haute performance pour lignes de production exigeantes.</p><span class="machine-link">Découvrir la machine <i class="fa-solid fa-arrow-right"></i></span></div>
-      </a>
-      <a class="machine-card reveal reveal-delay-1" href="products/l1/l1_hi200.html">
-        <img src="images/products/l1-inkjet_coding/hi200/hi200.jpeg" alt="HI200, imprimante jet d'encre">
-        <div class="machine-card-content"><span class="machine-type">Jet d'encre compact</span><h3>HI200</h3><p>Une solution précise et polyvalente pour les codes du quotidien.</p><span class="machine-link">Découvrir la machine <i class="fa-solid fa-arrow-right"></i></span></div>
-      </a>
-      <a class="machine-card reveal reveal-delay-2" href="products/l2/l2-hc300-co2-laser.html">
-        <img src="images/products/l2-laser_marking/hc300-co2-laser/hc300-co2.jpg" alt="HC300, laser CO2">
-        <div class="machine-card-content"><span class="machine-type">Laser CO₂</span><h3>HC300</h3><p>Un marquage net et permanent, sans consommable d'impression.</p><span class="machine-link">Découvrir la machine <i class="fa-solid fa-arrow-right"></i></span></div>
-      </a>
-      <a class="machine-card reveal" href="products/l2/l2-hf300_marking.html">
-        <img src="images/products/l2-laser_marking/hf300-fiber/hf300.jpg" alt="HF300, laser fibre">
-        <div class="machine-card-content"><span class="machine-type">Laser fibre</span><h3>HF300</h3><p>La performance laser pour métaux, plastiques et pièces techniques.</p><span class="machine-link">Découvrir la machine <i class="fa-solid fa-arrow-right"></i></span></div>
-      </a>
-      <a class="machine-card reveal reveal-delay-1" href="products/l6/l6.html">
-        <img src="images/products/l6-handheld/Ej1010r/EJ1010R.jpg" alt="EJ1010R, machine de codage portative">
-        <div class="machine-card-content"><span class="machine-type">Machine portative</span><h3>EJ1010R</h3><p>Le codage mobile et autonome, directement au point d'utilisation.</p><span class="machine-link">Découvrir la machine <i class="fa-solid fa-arrow-right"></i></span></div>
-      </a>
-      <a class="machine-card reveal reveal-delay-2" href="products/l6/l6.html">
-        <img src="images/products/l6-handheld/R10H/R10H.jpg" alt="R10H, machine portative">
-        <div class="machine-card-content"><span class="machine-type">Machine portative</span><h3>R10H</h3><p>Une solution légère pour le marquage rapide de lots et séries.</p><span class="machine-link">Découvrir la machine <i class="fa-solid fa-arrow-right"></i></span></div>
-      </a>
-    </div>
-  </div>
-</section>
 
 <!-- ===================== ABOUT ===================== -->
 <section class="section" id="about">
@@ -1555,5 +1495,6 @@ document.addEventListener('click', (e) => {
 
   
 </script>
+
 </body>
 </html>
