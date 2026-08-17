@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hi200 — Machine de codage Jet d'encre | RM MARK</title>
+<meta name="description" content="Hi200 : dispositif de codage jet d'encre avancé pour lignes de production haute vitesse. Impression ininterrompue, nette et fiable.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/css/common.css">
+<style>
+
+   .modal-form input[readonly]{
+  background:var(--steel-white); color:var(--ink-blue); font-weight:600; cursor:default;
+  border-color:var(--line);
+}
+
+
+  /* ---- Bande d'accent en dégradé qui glisse, juste sous le header ---- */
+.top-accent-bar{
+  height:4px; width:100%;
+  background:linear-gradient(90deg, var(--ink-blue), var(--bright-blue), var(--signal-red), var(--ink-blue));
+  background-size:300% 100%;
+  animation:accentSlide 6s linear infinite;
+}
+@keyframes accentSlide{
+  0%{background-position:0% 0%;}
+  100%{background-position:300% 0%;}
+}
+
+/* ---------- MODALS ---------- */
+.modal-overlay{
+  position:fixed; inset:0; background:rgba(11,20,31,0.6); backdrop-filter:blur(3px);
+  display:none; align-items:center; justify-content:center; z-index:2000; padding:20px;
+}
+.modal-overlay.open{display:flex;}
+.modal-box{
+  background:var(--panel); border-radius:18px; width:100%; max-width:520px;
+  max-height:88vh; overflow-y:auto; box-shadow:var(--shadow-md); position:relative;
+  animation:modalIn .3s var(--ease);
+}
+@keyframes modalIn{ from{opacity:0; transform:translateY(18px) scale(.98);} to{opacity:1; transform:translateY(0) scale(1);} }
+.modal-head{padding:26px 30px 0; display:flex; justify-content:space-between; align-items:flex-start;}
+.modal-head h3{color:var(--ink-blue); font-size:1.3rem; margin-bottom:6px;}
+.modal-head p{color:var(--slate); font-size:.88rem;}
+.modal-close{
+  background:var(--steel-white); border:1px solid var(--line); width:34px; height:34px; border-radius:10px;
+  display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--slate); flex-shrink:0;
+  transition:background .2s, color .2s;
+}
+.modal-close:hover{background:var(--ink-blue); color:#fff;}
+.modal-form{padding:20px 30px 30px; display:flex; flex-direction:column; gap:14px;}
+.modal-form .frow{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+.modal-form .fgroup{display:flex; flex-direction:column; gap:5px;}
+.modal-form label{font-size:.8rem; color:var(--slate); font-weight:500;}
+.modal-form label .req{color:var(--signal-red);}
+.modal-form input, .modal-form select, .modal-form textarea{
+  padding:12px 14px; border-radius:9px; border:1px solid var(--line); font-family:inherit;
+  font-size:.92rem; background:var(--steel-white); color:var(--graphite); transition:border-color .2s, box-shadow .2s;
+}
+.modal-form input:focus, .modal-form select:focus, .modal-form textarea:focus{
+  outline:none; border-color:var(--circuit-blue); box-shadow:0 0 0 4px rgba(22,99,176,0.12);
+}
+.modal-form input.invalid, .modal-form select.invalid, .modal-form textarea.invalid{
+  border-color:var(--signal-red); box-shadow:0 0 0 4px rgba(230,57,70,0.1);
+}
+.field-error{font-size:.76rem; color:var(--signal-red); display:none;}
+.field-error.show{display:block;}
+.modal-form textarea{resize:vertical; min-height:80px;}
+.modal-submit{
+  background:var(--ink-blue); color:#fff; border:none; padding:14px 26px; border-radius:100px;
+  font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px;
+  transition:background .3s, transform .2s;
+}
+.modal-submit:hover{background:var(--circuit-blue); transform:translateY(-2px);}
+.modal-submit:disabled{opacity:.6; cursor:not-allowed; transform:none;}
+#modalVisite .modal-submit{background:var(--signal-red);}
+#modalVisite .modal-submit:hover{background:#c62a37;}
+.modal-success{
+  display:none; flex-direction:column; align-items:center; text-align:center; gap:10px; padding:40px 30px;
+}
+.modal-success.show{display:flex;}
+.modal-success i{font-size:2.6rem; color:#22a35c;}
+.modal-success h4{color:var(--ink-blue); font-size:1.15rem;}
+.modal-success p{color:var(--slate); font-size:.9rem;}
+body.modal-locked{overflow:hidden;}
+
+@media (max-width:560px){
+  .modal-form .frow{grid-template-columns:1fr;}
+}
+
+
+
+  body{ font-family:'Inter',sans-serif; color:var(--graphite); background:var(--steel-white); line-height:1.6; padding-top:78px; }
+  h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;}
+  a{text-decoration:none; color:inherit;}
+  .container{max-width:1180px; margin:0 auto; padding:0 24px;}
+
+  /* ---- Fil d'Ariane ---- */
+  .breadcrumb{padding:18px 0 0; font-size:.85rem; color:var(--slate);}
+  .breadcrumb a{color:var(--circuit-blue);}
+  .breadcrumb a:hover{text-decoration:underline;}
+
+  /* ---- Héros produit ---- */
+  .product-hero{padding:24px 0 50px; display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center;}
+  .product-hero .img-wrap{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:30px;
+    display:flex; align-items:center; justify-content:center; min-height:360px;
+  }
+  .product-hero .img-wrap img{max-width:100%; max-height:340px; object-fit:contain;}
+
+  .product-hero .tag{
+    font-family:'JetBrains Mono',monospace; font-size:.75rem; color:var(--signal-red); text-transform:uppercase;
+    letter-spacing:.08em; font-weight:700; display:inline-flex; align-items:center; gap:8px;
+    margin-bottom:14px; padding:6px 14px; border-radius:100px;
+    background:rgba(230,57,70,0.08); border:1px solid rgba(230,57,70,0.2);
+  }
+  .product-hero .tag::before{
+    content:''; width:7px; height:7px; border-radius:50%; background:var(--signal-red); flex-shrink:0;
+    animation:tagPulse 1.8s infinite;
+  }
+  @keyframes tagPulse{
+    0%,100%{opacity:1; box-shadow:0 0 0 0 rgba(230,57,70,.5);}
+    50%{opacity:.4; box-shadow:0 0 0 6px rgba(230,57,70,0);}
+  }
+  .product-hero{position:relative;}
+.product-hero::before, .product-hero::after{
+  content:''; position:absolute; border-radius:50%; filter:blur(70px); opacity:.18; z-index:0; pointer-events:none;
+}
+.product-hero::before{
+  width:280px; height:280px; background:var(--bright-blue);
+  top:-40px; left:8%;
+  animation:floatBlob 9s ease-in-out infinite;
+}
+.product-hero::after{
+  width:220px; height:220px; background:var(--signal-red);
+  bottom:-30px; right:12%;
+  animation:floatBlob 11s ease-in-out infinite reverse;
+}
+@keyframes floatBlob{
+  0%,100%{ transform:translate(0,0) scale(1); }
+  50%{ transform:translate(18px,-16px) scale(1.1); }
+}
+.product-hero .img-wrap, .product-hero > div{position:relative; z-index:1;}
+ .product-hero .img-wrap{
+  transition:box-shadow .3s ease, transform .3s ease;
+}
+.product-hero .img-wrap:hover{
+  box-shadow:0 0 0 1px var(--bright-blue), 0 20px 40px rgba(22,99,176,0.15);
+  transform:translateY(-3px);
+}
+
+
+  .product-hero h1{font-size:clamp(1.8rem,3.4vw,2.5rem); color:var(--ink-blue); margin-bottom:16px;}
+  .product-hero p{color:var(--slate); font-size:1.02rem; margin-bottom:26px;}
+  .hero-actions{display:flex; gap:12px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:9px; padding:14px 24px; border-radius:100px;
+    font-weight:600; font-size:.9rem; cursor:pointer; border:none; transition:transform .2s, box-shadow .2s, background .2s;
+  }
+  .btn-primary{background:var(--ink-blue); color:#fff;}
+  .btn-primary:hover{background:var(--circuit-blue); transform:translateY(-2px); box-shadow:var(--shadow-md);}
+  .btn-outline{background:transparent; color:var(--ink-blue); border:1.5px solid var(--line);}
+  .btn-outline:hover{border-color:var(--ink-blue); transform:translateY(-2px);}
+
+  /* ---- Sections générales ---- */
+  .section{padding:50px 0;}
+  .section h2{font-size:1.5rem; color:var(--ink-blue); margin-bottom:18px;}
+  .section p{color:var(--slate); margin-bottom:14px;}
+
+  /* ---- Vidéo + téléchargements ---- */
+  .media-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:22px;}
+  .video-card{
+    background:#000; border-radius:var(--radius); overflow:hidden; aspect-ratio:16/10;
+    position:relative; box-shadow:var(--shadow-sm);
+  }
+  .video-card iframe{width:100%; height:100%; border:0; display:block;}
+  .info-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+    padding:30px 20px; gap:14px;
+  }
+  .info-card .icon-circle{
+    width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.4rem;
+  }
+  .info-card.doc .icon-circle{background:rgba(22,99,176,0.1); color:var(--circuit-blue);}
+  .info-card.wa .icon-circle{background:rgba(37,211,102,0.12); color:#25D366;}
+  .info-card h4{color:var(--ink-blue); font-size:1.05rem;}
+  .info-card .btn{background:var(--ink-blue); color:#fff;}
+  .info-card.wa .btn{background:#25D366;}
+  .info-card .btn:hover{transform:translateY(-2px);}
+
+  /* ---- Applications & communication (texte + image) ---- */
+  .comm-section{display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center;}
+  .comm-section .img-wrap{display:flex; align-items:center; justify-content:center;}
+  .comm-section .img-wrap img{max-width:100%; max-height:420px; object-fit:contain;}
+  .comm-section h3{color:var(--ink-blue); font-size:1rem; margin-bottom:16px;}
+  .comm-section h4{color:var(--graphite); font-size:.95rem; margin-bottom:8px; margin-top:18px;}
+  .comm-section p{color:var(--slate); font-size:.92rem;}
+
+  /* ---- Galerie ---- */
+  .gallery-tag{
+    display:inline-block; background:rgba(22,99,176,0.08); color:var(--circuit-blue); font-size:.78rem;
+    font-weight:700; padding:6px 14px; border-radius:100px; margin-bottom:20px;
+  }
+  .gallery-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  .gallery-grid img{
+    width:100%; aspect-ratio:1/1; object-fit:contain; background:#fff; border:1px solid var(--line);
+    border-radius:10px; padding:10px; cursor:pointer; transition:transform .25s, box-shadow .25s;
+  }
+  .gallery-grid img:hover{transform:translateY(-4px); box-shadow:var(--shadow-md);}
+
+  .lightbox{
+    position:fixed; inset:0; background:rgba(11,20,31,0.88); z-index:3000; display:none;
+    align-items:center; justify-content:center; padding:30px;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox img{max-width:90vw; max-height:85vh; border-radius:10px;}
+  .lightbox-close{
+    position:absolute; top:24px; right:28px; width:44px; height:44px; border-radius:50%;
+    background:rgba(255,255,255,.12); color:#fff; border:none; font-size:1.2rem; cursor:pointer;
+  }
+
+  /* ---- Autres machines ---- */
+  .related-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:20px;}
+  .related-card{
+    display:flex; gap:16px; align-items:center; background:#fff; border:1px solid var(--line);
+    border-radius:var(--radius); padding:16px; transition:transform .25s, box-shadow .25s;
+  }
+  .related-card:hover{transform:translateY(-4px); box-shadow:var(--shadow-md);}
+  .related-card img{width:80px; height:80px; object-fit:contain; background:var(--steel-white); border-radius:10px; padding:8px;}
+  .related-card h4{color:var(--ink-blue); font-size:.95rem; margin-bottom:4px;}
+  .related-card p{color:var(--slate); font-size:.8rem; margin:0;}
+
+  footer{background:var(--graphite); color:#B9C2CC; padding:34px 0; text-align:center; font-size:.82rem; margin-top:30px;}
+
+  @media (max-width:900px){
+    .product-hero, .comm-section, .media-grid, .related-grid{grid-template-columns:1fr;}
+    .gallery-grid{grid-template-columns:repeat(2,1fr);}
+  }
+</style>
+</head>
+<body>
+
+<div id="site-sidebar"></div>
+<div id="site-header"></div>
+<div class="top-accent-bar"></div>
+
+<div class="container">
+  <div class="breadcrumb">
+    <a href="/index.html#top">Accueil</a> / <a href="/products/l1/produits-jet-encre.html">Jet d'encre</a> / Hi200
+  </div>
+</div>
+
+<!-- ===== HÉROS PRODUIT ===== -->
+<div class="container">
+  <div class="product-hero">
+    <div class="img-wrap">
+      <img src="/images/products/l1-inkjet_coding/hi200/hi200.jpg" alt="Hi200 — Machine de codage jet d'encre">
+    </div>
+    <div>
+      <span class="tag">Jet d'encre continu — CIJ</span>
+      <h1>Hi200 — Machine de codage Jet d'encre</h1>
+      <p>Dispositif de codage jet d'encre avancé conçu pour les lignes de production à haute vitesse, offrant une impression ininterrompue et nette. Sa construction robuste et son interface intuitive garantissent des performances fiables en environnement industriel.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
+        <button class="btn btn-outline" onclick="openModal('modalVisite')"><i class="fa-solid fa-calendar-check"></i> Demande de visite commerciale</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== GALERIE (au-dessus de la vidéo) ===== -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <span class="gallery-tag">Gallery</span>
+    <div class="gallery-grid" id="galleryGrid">
+      <img src="/images/products/l1-inkjet_coding/hi200/hi200_img1.jpg" alt="Hi200 vue 1">
+    </div>
+  </div>
+</section>
+
+<!-- ===== VIDÉO + TÉLÉCHARGEMENTS ===== -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="media-grid">
+      <div class="video-card">
+        <iframe src="https://youtu.be/oRZUytUDpLE?si=CdNnOfIQ1XkvuLH4" title="Présentation Hi200" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="info-card doc">
+        <div class="icon-circle"><i class="fa-solid fa-file-lines"></i></div>
+        <h4>Fiche technique Hi200</h4>
+        <a href="/documents/l1/hi200.pdf" download class="btn"><i class="fa-solid fa-download"></i> Télécharger la brochure</a>
+      </div>
+      <div class="info-card wa">
+        <div class="icon-circle"><i class="fa-brands fa-whatsapp"></i></div>
+        <h4>Ligne support WhatsApp</h4>
+        <a href="https://wa.me/212700181810" target="_blank" rel="noopener" class="btn"><i class="fa-brands fa-whatsapp"></i> Nous écrire</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== APPLICATIONS & COMMUNICATION ===== -->
+<section class="section">
+  <div class="container">
+    <div class="comm-section">
+      <div>
+        <h2>Applications industrielles et communication avec d'autres appareils</h2>
+        <h4>Codage jet d'encre intelligent compatible ERP</h4>
+        <p>Le Hi200 RM MARK, grâce au support MODBUS TCP/IP, VNC et Ethernet, s'intègre facilement à vos systèmes ERP, PLC et de suivi de production.</p>
+        <p>Les données variables comme la date, le lot, le numéro de série, le code-barres et le QR code sont envoyées automatiquement à la machine. Grâce au support VNC, le Hi200 peut être surveillé et contrôlé à distance depuis un PC, une tablette ou un smartphone.</p>
+        <p>Dispositif de codage jet d'encre compatible ERP, avec support MODBUS TCP/IP et VNC.</p>
+      </div>
+      <div class="img-wrap">
+        <img src="/images/products/l1-inkjet_coding/hi200/hi200.jpg" alt="Hi200 sur pied mobile">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AUTRES MACHINES ===== -->
+<section class="section">
+  <div class="container">
+    <h2>Autres machines de cette gamme</h2>
+    <div class="related-grid">
+      <a href="/products/l1/l1_hi100.html" class="related-card">
+        <img src="/images/products/l1-inkjet_coding/hi100/hi100.jpg" alt="Hi100">
+        <div><h4>Hi100</h4><p>Système jet d'encre continu compact et fiable.</p></div>
+      </a>
+      <a href="/products/l1/l1_ci8550.html" class="related-card">
+        <img src="/images/products/l1-inkjet_coding/ci8550/ci8550.jpg" alt="CI8550">
+        <div><h4>CI8550</h4><p>Codage pigment blanc pour supports foncés.</p></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">&copy; <span id="year"></span> RM MARK — Coding &amp; Marking Services. Tous droits réservés.</div>
+</footer>
+
+<!-- ===== LIGHTBOX GALERIE ===== -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
+  <img id="lightboxImg" src="" alt="Aperçu">
+</div>
+
+<!-- ===== MODALES DEVIS / VISITE ===== -->
+<div class="modal-overlay" id="modalDevis">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <h3>Demande de devis</h3>
+        <p>Remplissez ce formulaire, notre équipe vous recontacte sous 24 à 48h.</p>
+      </div>
+      <div class="modal-close" onclick="closeModal('modalDevis')"><i class="fa-solid fa-xmark"></i></div>
+    </div>
+    <form class="modal-form" id="formDevis" novalidate>
+      <div class="frow">
+        <div class="fgroup">
+          <label>Nom complet <span class="req">*</span></label>
+          <input type="text" name="nom" required>
+          <span class="field-error">Merci d'indiquer votre nom.</span>
+        </div>
+        <div class="fgroup">
+          <label>Société <span class="req">*</span></label>
+          <input type="text" name="societe" required>
+          <span class="field-error">Merci d'indiquer votre société.</span>
+        </div>
+      </div>
+      <div class="frow">
+        <div class="fgroup">
+          <label>E-mail <span class="req">*</span></label>
+          <input type="email" name="email" required>
+          <span class="field-error">E-mail invalide.</span>
+        </div>
+        <div class="fgroup">
+          <label>Téléphone <span class="req">*</span></label>
+          <input type="tel" name="telephone" required>
+          <span class="field-error">Merci d'indiquer un téléphone.</span>
+        </div>
+      </div>
+      <div class="frow">
+        <div class="fgroup">
+          <label>Machine concernée</label>
+          <input type="text" id="machineDisplay" value="Hi200 — Machine de codage Jet d'encre" readonly>
+          <input type="hidden" name="typeBesoin" id="machineHidden" value="Hi200 — Machine de codage Jet d'encre">
+        </div>
+        <div class="fgroup">
+          <label>Quantité éventuelle</label>
+          <input type="text" name="quantite" placeholder="ex : 2 imprimantes...">
+        </div>
+      </div>
+      <div class="fgroup">
+        <label>Message <span class="req">*</span></label>
+        <textarea name="message" rows="3" required placeholder="Décrivez votre besoin..."></textarea>
+        <span class="field-error">Merci de décrire votre besoin.</span>
+      </div>
+      <button type="submit" class="modal-submit"><i class="fa-solid fa-paper-plane"></i> Envoyer ma demande de devis</button>
+    </form>
+    <div class="modal-success" id="successDevis">
+      <i class="fa-solid fa-circle-check"></i>
+      <h4>Demande envoyée !</h4>
+      <p>Merci, votre demande de devis a bien été transmise.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalVisite">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <h3>Demande de visite commerciale</h3>
+        <p>Un technico-commercial RM MARK se déplace sur site.</p>
+      </div>
+      <div class="modal-close" onclick="closeModal('modalVisite')"><i class="fa-solid fa-xmark"></i></div>
+    </div>
+    <form class="modal-form" id="formVisite" novalidate>
+      <div class="frow">
+        <div class="fgroup">
+          <label>Nom complet <span class="req">*</span></label>
+          <input type="text" name="nom" required>
+          <span class="field-error">Merci d'indiquer votre nom.</span>
+        </div>
+        <div class="fgroup">
+          <label>Société <span class="req">*</span></label>
+          <input type="text" name="societe" required>
+          <span class="field-error">Merci d'indiquer votre société.</span>
+        </div>
+      </div>
+      <div class="frow">
+        <div class="fgroup">
+          <label>E-mail <span class="req">*</span></label>
+          <input type="email" name="email" required>
+          <span class="field-error">E-mail invalide.</span>
+        </div>
+        <div class="fgroup">
+          <label>Téléphone <span class="req">*</span></label>
+          <input type="tel" name="telephone" required>
+          <span class="field-error">Merci d'indiquer un téléphone.</span>
+        </div>
+      </div>
+      <div class="fgroup">
+        <label>Adresse du site à visiter <span class="req">*</span></label>
+        <input type="text" name="adresse" required>
+        <span class="field-error">Merci d'indiquer l'adresse du site.</span>
+      </div>
+      <div class="frow">
+        <div class="fgroup">
+          <label>Date souhaitée <span class="req">*</span></label>
+          <input type="date" name="date" required>
+          <span class="field-error">Merci de choisir une date.</span>
+        </div>
+        <div class="fgroup">
+          <label>Créneau préféré</label>
+          <select name="creneau">
+            <option value="">Indifférent</option>
+            <option>Matin</option>
+            <option>Après-midi</option>
+          </select>
+        </div>
+      </div>
+      <div class="fgroup">
+        <label>Message</label>
+        <textarea name="message" rows="3"></textarea>
+      </div>
+      <button type="submit" class="modal-submit"><i class="fa-solid fa-calendar-check"></i> Envoyer ma demande de visite</button>
+    </form>
+    <div class="modal-success" id="successVisite">
+      <i class="fa-solid fa-circle-check"></i>
+      <h4>Demande envoyée !</h4>
+      <p>Merci, votre demande de visite a bien été transmise.</p>
+    </div>
+  </div>
+</div>
+
+<script src="/js/common.js" defer></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  function openModal(id){
+    document.getElementById(id).classList.add('open');
+    document.body.classList.add('modal-locked');
+  }
+  function closeModal(id){
+    document.getElementById(id).classList.remove('open');
+    document.body.classList.remove('modal-locked');
+  }
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(overlay.id); });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(o => closeModal(o.id));
+  });
+
+  const WHATSAPP_NUMBER = '212700181810';
+  const NOTIFY_EMAIL = 'r.merouan@electrojet.ma';
+
+  function validateForm(form){
+    let valid = true;
+    form.querySelectorAll('[required]').forEach(field => {
+      const errorEl = field.parentElement.querySelector('.field-error');
+      let fieldValid = field.value.trim() !== '';
+      if (field.type === 'email' && fieldValid) fieldValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value.trim());
+      if (field.type === 'tel' && fieldValid) fieldValid = field.value.trim().replace(/[^0-9+]/g,'').length >= 8;
+      if (!fieldValid) { valid = false; field.classList.add('invalid'); if (errorEl) errorEl.classList.add('show'); }
+      else { field.classList.remove('invalid'); if (errorEl) errorEl.classList.remove('show'); }
+    });
+    return valid;
+  }
+  document.querySelectorAll('.modal-form input, .modal-form select, .modal-form textarea').forEach(field => {
+    field.addEventListener('input', () => {
+      field.classList.remove('invalid');
+      const errorEl = field.parentElement.querySelector('.field-error');
+      if (errorEl) errorEl.classList.remove('show');
+    });
+  });
+
+  async function submitLead(form, title, successId, modalId){
+    const data = Object.fromEntries(new FormData(form).entries());
+    const submitBtn = form.querySelector('.modal-submit');
+    submitBtn.disabled = true;
+    const originalHTML = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Envoi en cours...';
+    try {
+      await fetch('https://formsubmit.co/ajax/' + NOTIFY_EMAIL, {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ _subject: title, ...data })
+      });
+    } catch (err) { console.warn('Envoi e-mail indisponible.', err); }
+    let waText = '*' + title + '*%0A%0A';
+    Object.entries(data).forEach(([key, value]) => { if (value) waText += '*' + key + ' :* ' + encodeURIComponent(value) + '%0A'; });
+    window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + waText, '_blank');
+    form.style.display = 'none';
+    document.getElementById(successId).classList.add('show');
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalHTML;
+    setTimeout(() => {
+      closeModal(modalId);
+      setTimeout(() => { form.reset(); form.style.display = 'flex'; document.getElementById(successId).classList.remove('show'); }, 400);
+    }, 3500);
+  }
+
+  document.getElementById('formDevis').addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!validateForm(e.target)) return;
+    submitLead(e.target, 'Nouvelle demande de devis - Hi200 - RM MARK', 'successDevis', 'modalDevis');
+  });
+  document.getElementById('formVisite').addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!validateForm(e.target)) return;
+    submitLead(e.target, 'Nouvelle demande de visite - Hi200 - RM MARK', 'successVisite', 'modalVisite');
+  });
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  document.querySelectorAll('#galleryGrid img').forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightbox.classList.add('open');
+    });
+  });
+  function closeLightbox(){ lightbox.classList.remove('open'); }
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+</script>
+</body>
+</html>
