@@ -9,77 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-  
-
-  /* ===== SLIDER "1 machine à la fois" ===== */
-.machine-slider-wrap{position:relative; padding:10px 0 50px;}
-.machine-slider{
-  position:relative; overflow:hidden; border-radius:20px;
-  background:var(--panel); border:1px solid var(--line); box-shadow:var(--shadow-md);
-}
-.machine-track{display:flex; transition:transform .5s var(--ease);}
-.machine-slide{
-  flex:0 0 100%; display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:0; min-height:420px;
-}
-.machine-slide .img-wrap{
-  height:100%; min-height:420px; background:#fff; display:flex; align-items:center; justify-content:center;
-  padding:40px; border-right:1px solid var(--line);
-}
-.machine-slide .img-wrap img{max-width:100%; max-height:360px; object-fit:contain;}
-.machine-slide .slide-body{padding:44px 48px;}
-.machine-slide .slide-body .label{
-  color:var(--ink-blue); font-weight:700; font-size:1.5rem; margin-bottom:16px; display:block;
-}
-.machine-slide .slide-body p{color:var(--slate); font-size:.98rem; line-height:1.7; margin-bottom:26px;}
-.machine-slide .slide-body .btn{
-  display:inline-flex; align-items:center; gap:8px; background:var(--ink-blue); color:#fff;
-  padding:13px 26px; border-radius:100px; font-size:.9rem; font-weight:600; border:none; cursor:pointer;
-  transition:background .25s, transform .25s;
-}
-.machine-slide .slide-body .btn:hover{background:var(--circuit-blue); transform:translateY(-2px);}
-
-.slide-actions{display:flex; gap:12px; flex-wrap:wrap;}
-.btn-outline{
-  display:inline-flex; align-items:center; gap:8px; background:transparent; color:var(--ink-blue);
-  padding:13px 26px; border-radius:100px; font-size:.9rem; font-weight:600;
-  border:1.5px solid var(--line); cursor:pointer; transition:border-color .25s, transform .25s, color .25s;
-}
-.btn-outline:hover{border-color:var(--ink-blue); transform:translateY(-2px);}
-
-/* ---- flèches circulaires (statiques, sans animation) ---- */
-.scroll-arrow{
-  position:absolute; top:50%; transform:translateY(-50%);
-  width:56px; height:56px; border-radius:50%; z-index:5;
-  padding:3px; cursor:pointer; border:none;
-  background:conic-gradient(from 0deg, var(--ink-blue), var(--signal-red), var(--ink-blue));
-  box-shadow:var(--shadow-md);
-  transition:transform .25s var(--ease);
-}
-.scroll-arrow:hover{transform:translateY(-50%) scale(1.08);}
-.scroll-arrow .inner{
-  width:100%; height:100%; border-radius:50%; background:#fff;
-  display:flex; align-items:center; justify-content:center;
-  color:var(--ink-blue); font-size:1.2rem; transition:color .25s, background .25s;
-}
-.scroll-arrow:hover .inner{background:var(--ink-blue); color:#fff;}
-.scroll-arrow.prev{left:-22px;}
-.scroll-arrow.next{right:-22px;}
-
-/* ---- points indicateurs ---- */
-.slider-dots{display:flex; justify-content:center; gap:8px; margin-top:20px;}
-.slider-dots button{
-  width:9px; height:9px; border-radius:50%; border:none; background:var(--line); cursor:pointer;
-  transition:background .25s, transform .25s;
-}
-.slider-dots button.active{background:var(--ink-blue); transform:scale(1.3);}
-
-@media (max-width:820px){
-  .machine-slide{grid-template-columns:1fr; min-height:auto;}
-  .machine-slide .img-wrap{border-right:none; border-bottom:1px solid var(--line); min-height:260px; padding:26px;}
-  .machine-slide .slide-body{padding:28px;}
-  .scroll-arrow{width:44px; height:44px;}
-  .scroll-arrow.prev{left:6px;} .scroll-arrow.next{right:6px;}
-}
 
 
 .has-dropdown{position:relative;}
@@ -717,6 +646,86 @@
   }
 
 
+  /* ---------- MACHINES CAROUSEL (gammes de produits) ---------- */
+  .machines-section{background:var(--panel);}
+  .machines-head{max-width:640px; margin:0 auto 44px; text-align:center;}
+  .machines-head .section-tag{
+    font-family:'JetBrains Mono',monospace; font-size:.75rem; color:var(--signal-red);
+    text-transform:uppercase; letter-spacing:.08em; font-weight:600; margin-bottom:12px; display:inline-block;
+  }
+  .machines-head h2{font-size:clamp(1.7rem,3.4vw,2.5rem); color:var(--ink-blue); margin-bottom:14px;}
+  .machines-head p{color:var(--slate); font-size:1.03rem;}
+
+  .machines-carousel-wrap{position:relative; padding:0 0 10px;}
+  .machines-carousel{
+    position:relative; overflow:hidden; border-radius:20px;
+    background:var(--panel); border:1px solid var(--line); box-shadow:var(--shadow-md);
+  }
+  .machines-track{display:flex; transition:transform .5s var(--ease);}
+  .machine-gamme-slide{
+    flex:0 0 100%; display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:0; min-height:420px;
+  }
+  .machine-gamme-slide .gamme-img-wrap{
+    height:100%; min-height:420px; background:var(--steel-white); display:flex; align-items:center; justify-content:center;
+    padding:40px; border-right:1px solid var(--line);
+  }
+  .machine-gamme-slide .gamme-img-wrap img{max-width:100%; max-height:340px; object-fit:contain; border-radius:14px;}
+  .machine-gamme-slide .gamme-body{padding:44px 48px;}
+  .machine-gamme-slide .gamme-eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:.75rem; color:var(--circuit-blue);
+    text-transform:uppercase; letter-spacing:.08em; font-weight:700; display:inline-block; margin-bottom:14px;
+    background:rgba(22,99,176,0.08); padding:6px 14px; border-radius:100px; border:1px solid rgba(22,99,176,0.18);
+  }
+  .machine-gamme-slide .gamme-body h3{
+    color:var(--ink-blue); font-size:1.6rem; margin-bottom:16px; font-family:'Space Grotesk',sans-serif;
+  }
+  .machine-gamme-slide .gamme-body p{color:var(--slate); font-size:.98rem; line-height:1.7; margin-bottom:26px;}
+  .gamme-actions{display:flex; gap:12px; flex-wrap:wrap; align-items:center;}
+  .gamme-actions .btn-primary{
+    display:inline-flex; align-items:center; gap:9px; background:var(--ink-blue); color:#fff;
+    padding:13px 26px; border-radius:100px; font-size:.9rem; font-weight:600; border:none; cursor:pointer;
+    transition:background .25s, transform .25s;
+  }
+  .gamme-actions .btn-primary:hover{background:var(--circuit-blue); transform:translateY(-2px);}
+  .gamme-actions .gamme-link{
+    display:inline-flex; align-items:center; gap:8px; color:var(--ink-blue); font-weight:600; font-size:.9rem;
+    padding:13px 6px; transition:color .25s, gap .25s;
+  }
+  .gamme-actions .gamme-link:hover{color:var(--signal-red); gap:12px;}
+
+  .machines-arrow{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:56px; height:56px; border-radius:50%; z-index:5;
+    padding:3px; cursor:pointer; border:none;
+    background:conic-gradient(from 0deg, var(--ink-blue), var(--signal-red), var(--ink-blue));
+    box-shadow:var(--shadow-md);
+    transition:transform .25s var(--ease);
+  }
+  .machines-arrow:hover{transform:translateY(-50%) scale(1.08);}
+  .machines-arrow .inner{
+    width:100%; height:100%; border-radius:50%; background:#fff;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--ink-blue); font-size:1.2rem; transition:color .25s, background .25s;
+  }
+  .machines-arrow:hover .inner{background:var(--ink-blue); color:#fff;}
+  .machines-arrow.prev{left:-22px;}
+  .machines-arrow.next{right:-22px;}
+
+  .machines-dots{display:flex; justify-content:center; gap:8px; margin-top:22px;}
+  .machines-dots button{
+    width:9px; height:9px; border-radius:50%; border:none; background:var(--line); cursor:pointer;
+    transition:background .25s, transform .25s;
+  }
+  .machines-dots button.active{background:var(--ink-blue); transform:scale(1.3);}
+
+  @media (max-width:820px){
+    .machine-gamme-slide{grid-template-columns:1fr; min-height:auto;}
+    .machine-gamme-slide .gamme-img-wrap{border-right:none; border-bottom:1px solid var(--line); min-height:240px; padding:26px;}
+    .machine-gamme-slide .gamme-body{padding:28px;}
+    .machines-arrow{width:44px; height:44px;}
+    .machines-arrow.prev{left:6px;} .machines-arrow.next{right:6px;}
+  }
+
   
 </style>
 
@@ -758,7 +767,7 @@
   <nav>
     <a href="#top" class="brand">
       <div class="brand-mark" style="width:auto;height:auto;background:none;border:none;box-shadow:none;">
-        <img src="images/index//page2_img7.jpeg" alt="RM MARK" style="height:42px;width:auto;object-fit:contain;">
+        <img src="images/page2_img7.jpeg" alt="RM MARK" style="height:42px;width:auto;object-fit:contain;">
       </div>
       <div class="brand-text">
         <span class="b1">RM MARK</span>
@@ -777,14 +786,21 @@
 
       <li class="has-dropdown">
         <a href="#solutions">Products <i class="fa-solid fa-chevron-down" style="font-size:.7em;margin-left:4px;"></i></a>
+        <div class="dropdown-menu">
           <!-- APRÈS — dans le dropdown "Products" -->
         <div class="dropdown-menu">
-          <a href="products/l1/produits-jet-encre.html">Jet d'encre</a>
-          <a href="products/l2/l2.html">Marquage Laser</a>
-          <a href="products/l3/l3.html">Maintenance-free</a>
-          <a href="products/l4/l4.html">Labeling</a>
-          <a href="products/l5/l5.html">consumables</a>
-          <a href="products/l6/l6.html">Hand type coding devices</a>
+          <a href="products/produits-jet-encre.html">Jet d'encre</a>
+          <a href="#solutions">Transfert thermique</a>
+          <a href="#solutions">Marquage Laser</a>
+          <a href="#solutions">Impression / Pose d'étiquettes</a>
+        </div>
+
+
+
+          <a href="#solutions">Jet d'encre — Grands caractères</a>
+          <a href="#solutions">Jet d'encre — Haute résolution</a>
+          <a href="#solutions">Transfert thermique</a>
+          <a href="#solutions">Marquage Laser</a>
           <a href="#solutions">Impression / Pose d'étiquettes</a>
         </div>
       </li>
@@ -822,7 +838,7 @@
     <div class="hero-visual">
       <div class="pipe-card">
         <div class="pipe-visual">
-    <img src="images/index/page1_img1.jpeg" alt="Solutions de marquage RM MARK" style="width:100%; border-radius:14px; height:auto; max-height:280px; object-fit:cover;">
+    <img src="images/page1_img1.jpeg" alt="Solutions de marquage RM MARK" style="width:100%; border-radius:14px; height:auto; max-height:280px; object-fit:cover;">
 </div>
         <div class="stat-row">
           <div><div class="stat-num">15+</div><div class="stat-label">Ans d'expertise</div></div>
@@ -858,401 +874,126 @@
   </div>
 </div>
 
-<!-- ===== SLIDER "1 machine à la fois" ===== -->
- 
-   
-<div class="container">
-  <h3>jet encre</h3>
-  <div class="machine-slider-wrap">
 
-    <button class="scroll-arrow prev" id="slidePrev" aria-label="Machine précédente">
-      <span class="inner"><i class="fa-solid fa-chevron-left"></i></span>
-    </button>
+<!-- ===================== GAMMES DE PRODUITS (CAROUSEL) ===================== -->
+<section class="section machines-section" id="machines">
+  <div class="container">
+    <div class="machines-head reveal">
+      <span class="section-tag">Nos gammes de produits</span>
+      <h2>Une solution adaptée à chaque besoin.</h2>
+      <p>Découvrez les six familles de produits RM MARK et trouvez la machine adaptée à votre ligne de production.</p>
+    </div>
 
-    <div class="machine-slider">
-      <div class="machine-track" id="machineTrack">
+    <div class="machines-carousel-wrap">
 
-        <div class="machine-slide">
-          <a href="/products/l1/l1_hi100.html" class="img-wrap">
-            <img src="/images/products/l1-inkjet_coding/hi100/hi100.jpg" alt="Hi100 — Machine de codage jet d'encre">
-          </a>
-          <div class="slide-body">
-            <span class="label">Hi100 — Machine de codage Jet d'encre</span>
-            <p>Système jet d'encre continu (CIJ) compact et fiable, adapté aux lignes de production standards nécessitant un marquage rapide et net.</p>
-            <div class="slide-actions">
-              <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
-              <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les machines</button>
+      <button class="machines-arrow prev" id="machinesPrev" aria-label="Gamme précédente">
+        <span class="inner"><i class="fa-solid fa-chevron-left"></i></span>
+      </button>
+
+      <div class="machines-carousel">
+        <div class="machines-track" id="machinesTrack">
+
+          <div class="machine-gamme-slide">
+            <div class="gamme-img-wrap">
+              <img src="images/products/l1-inkjet_coding/hi200/hi200.jpg" alt="Machines de codage Jet d'encre">
             </div>
-          </div>
-        </div>
-
-        <div class="machine-slide">
-          <a href="/products/l1/l1_hi200.html" class="img-wrap">
-            <img src="/images/products/l1-inkjet_coding/hi200/hi200.jpg" alt="Hi200 — Machine de codage jet d'encre">
-          </a>
-            <div class="slide-body">
-              <span class="label">Hi200 — Machine de codage Jet d'encre</span>
-              <p>Version avancée avec tour de signalisation lumineuse et écran tactile, pensée pour un suivi visuel de production en temps réel.</p>
-              <div class="slide-actions">
-                <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
-                <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les machines</button>
+            <div class="gamme-body">
+              <span class="gamme-eyebrow">Gamme 01 — Jet d'encre</span>
+              <h3>Machines de codage Jet d'encre</h3>
+              <p>Des imprimantes CIJ et TIJ pour réaliser des codes nets, rapides et fiables sur vos lignes de production.</p>
+              <div class="gamme-actions">
+                <button class="btn-primary" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
+                <a href="products/l1/produits-jet-encre.html" class="gamme-link">Voir la gamme <i class="fa-solid fa-arrow-right"></i></a>
               </div>
             </div>
-        </div>
-
-        <div class="machine-slide">
-          <a href="/products/l1/l1_ci8550.html" class="img-wrap">
-            <img src="/images/products/l1-inkjet_coding/ci8550/ci8550.jpg" alt="CI8550 — Machine de codage jet d'encre blanc pigmenté">
-          </a>
-          <div class="slide-body">
-            <span class="label">CI8550 — Codage pigment blanc</span>
-            <p>Impression jet d'encre pigmenté blanc pour un marquage lisible sur emballages foncés et supports opaques.</p>
-            <div class="slide-actions">
-              <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
-              <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les machines</button>
-            </div>
           </div>
-        </div>
 
-      </div>
-    </div>
-
-    <button class="scroll-arrow next" id="slideNext" aria-label="Machine suivante">
-      <span class="inner"><i class="fa-solid fa-chevron-right"></i></span>
-    </button>
-
-    <div class="slider-dots" id="sliderDots"></div>
-  </div>
-</div>
-
-<div class="container">
-  <h3>marquage laser</h3> 
-  <div class="machine-slider-wrap">
-
-    <button class="scroll-arrow prev" id="slidePrev" aria-label="Machine précédente">
-      <span class="inner"><i class="fa-solid fa-chevron-left"></i></span>
-    </button>
-
-    <div class="machine-slider">
-      <div class="machine-track" id="machineTrack">
-
-        <div class="machine-slide">
-          <a href="/products/l2/l2-hc300-co2-laser.html" class="img-wrap">
-            <img src="/images/products/l2-laser_marking/hc300-co2-laser/hc300-co2.jpg" alt="HC300-CO2 Laser — Machine de marquage laser">
-          </a>
-          <div class="slide-body">
-            <span class="label">HC300-CO2 Laser — Machine de marquage laser</span>
-            <p>Machine de marquage laser CO2 haute puissance, adaptée aux matériaux difficiles à graver.</p>
-            <div class="slide-actions">
-              <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
-              <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les machines</button>
+          <div class="machine-gamme-slide">
+            <div class="gamme-img-wrap">
+              <img src="images/products/l2-laser_marking/hc300-co2-laser/hc300-co2.jpg" alt="Machines de marquage laser">
             </div>
-          </div>
-        </div>
-
-        <div class="machine-slide">
-          <a href="/products/l2/l2-hf300_marking.html" class="img-wrap">
-            <img src="/images/products/l2-laser_marking/hf300-fiber/hf300.jpg" alt="HF300 Marking — Machine de marquage laser">
-          </a>
-            <div class="slide-body">
-              <span class="label">HF300 Marking — Machine de marquage laser</span>
-              <p>Machine de marquage laser à fibre, adaptée aux matériaux métalliques et aux applications de marquage haute précision.</p>
-              <div class="slide-actions">
-                <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
-                <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les machines</button>
+            <div class="gamme-body">
+              <span class="gamme-eyebrow">Gamme 02 — Marquage laser</span>
+              <h3>Machines de marquage laser</h3>
+              <p>Des solutions CO₂ et fibre pour un marquage permanent, précis et sans consommable d'impression.</p>
+              <div class="gamme-actions">
+                <button class="btn-primary" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
+                <a href="products/l2/l2.html" class="gamme-link">Voir la gamme <i class="fa-solid fa-arrow-right"></i></a>
               </div>
             </div>
-        </div>
-
-      </div>
-    </div>
-
-    <button class="scroll-arrow next" id="slideNext" aria-label="Machine suivante">
-      <span class="inner"><i class="fa-solid fa-chevron-right"></i></span>
-    </button>
-
-    <div class="slider-dots" id="sliderDots"></div>
-  </div>
-</div>
-
-
-<div class="container">
-  <h3>maintenance-free</h3>
-  <div class="machine-slider-wrap">
-
-    <button class="scroll-arrow prev" id="slidePrev" aria-label="Machine précédente">
-      <span class="inner"><i class="fa-solid fa-chevron-left"></i></span>
-    </button>
-
-    <div class="machine-slider">
-      <div class="machine-track" id="machineTrack">
-
-        <div class="machine-slide">
-          <a href="/products/l3/10pro.html" class="img-wrap">
-            <img src="/images/products/l3-mainteneance-free/R10 PRO/R10pro.jpg" alt="R10 PRO — Machine de marquage maintenance-free">
-          </a>
-
-          <div class="slide-body">
-            <span class="label">R10 PRO — Machine de marquage maintenance-free</span>
-            <p>Système de maintenance-free compact et fiable, adapté aux lignes de production standards nécessitant un marquage rapide et net.</p>
-            <div class="slide-actions">
-              <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
-              <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les machines</button>
-            </div>
           </div>
-        </div>
 
-        <div class="machine-slide">
-          <a href="/products/l3/10e.html" class="img-wrap">
-            <img src="/images/products/l3-mainteneance-free/R10E/R10E.png" alt="R10E — Machine de marquage maintenance-free">
-          </a>
-            <div class="slide-body">
-              <span class="label">R10E — Machine de marquage maintenance-free</span>
-              <p>Version avancée avec tour de signalisation lumineuse et écran tactile, pensée pour un suivi visuel de production en temps réel.</p>
-              <div class="slide-actions">
-                <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
-                <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les machines</button>
+          <div class="machine-gamme-slide">
+            <div class="gamme-img-wrap">
+              <img src="images/products/l3-mainteneance-free/R10E/R10E.png" alt="Jet d'encre sans maintenance">
+            </div>
+            <div class="gamme-body">
+              <span class="gamme-eyebrow">Gamme 03 — Sans maintenance</span>
+              <h3>Jet d'encre sans maintenance</h3>
+              <p>Des imprimantes simples à utiliser, économiques et prêtes à accompagner vos besoins de codage au quotidien.</p>
+              <div class="gamme-actions">
+                <button class="btn-primary" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
+                <a href="products/l3/l3.html" class="gamme-link">Voir la gamme <i class="fa-solid fa-arrow-right"></i></a>
               </div>
             </div>
-        </div>
-
-        <div class="machine-slide">
-          <a href="/products/l3/10h.html" class="img-wrap">
-            <img src="/images/products/l3-mainteneance-free/R10H/r10h.jpg" alt="R10H — Machine de marquage maintenance-free">
-          </a>
-          <div class="slide-body">
-            <span class="label">R10H — Machine de marquage maintenance-free</span>
-            <p>Version haut de gamme avec fonctionnalités avancées, pensée pour les environnements de production exigeants.</p>
-            <div class="slide-actions">
-              <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
-              <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les machines</button>
-            </div>
           </div>
-        </div>
 
-        <div class="machine-slide">
-          <a href="/products/l3/20.html" class="img-wrap">
-            <img src="/images/products/l3-mainteneance-free/R20/R20.png" alt="R20 — Machine de marquage maintenance-free">
-          </a>
-          <div class="slide-body">
-            <span class="label">R20 — Machine de marquage maintenance-free</span>
-            <p>Version haut de gamme avec fonctionnalités avancées, pensée pour les environnements de production exigeants.</p>
-            <div class="slide-actions">
-              <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
-              <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les machines</button>
+          <div class="machine-gamme-slide">
+            <div class="gamme-img-wrap">
+              <img src="images/products/l4-labeling_machine/EA100.jpg" alt="Machine d'étiquetage automatique">
             </div>
-          </div>
-        </div>
-
-        <div class="machine-slide">
-          <a href="/products/l3/60.html" class="img-wrap">
-            <img src="/images/products/l3-mainteneance-free/R60/r60.jpg" alt="R60 — Machine de marquage maintenance-free">
-          </a>
-          <div class="slide-body">
-            <span class="label">R60 — Machine de marquage maintenance-free</span>
-            <p>Version haut de gamme avec fonctionnalités avancées, pensée pour les environnements de production exigeants.</p>
-            <div class="slide-actions">
-              <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
-              <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les machines</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="machine-slide">
-          <a href="/products/l3/1040.html" class="img-wrap">
-            <img src="/images/products/l3-mainteneance-free/R1040/b1040.png" alt="B1040 — Machine de marquage maintenance-free">
-          </a>
-          <div class="slide-body">
-            <span class="label">B1040 — Machine de marquage maintenance-free</span>
-            <p>Version haut de gamme avec fonctionnalités avancées, pensée pour les environnements de production exigeants.</p>
-            <div class="slide-actions">
-              <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
-              <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les machines</button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <button class="scroll-arrow next" id="slideNext" aria-label="Machine suivante">
-      <span class="inner"><i class="fa-solid fa-chevron-right"></i></span>
-    </button>
-
-    <div class="slider-dots" id="sliderDots"></div>
-  </div>
-</div>
-
-<div class="container">
-  <h3>consumable</h3>
-  <div class="machine-slider-wrap">
-
-    <button class="scroll-arrow prev" id="slidePrev" aria-label="Consommable précédent">
-      <span class="inner"><i class="fa-solid fa-chevron-left"></i></span>
-    </button>
-
-    <div class="machine-slider">
-      <div class="machine-track" id="machineTrack">
-
-        <div class="machine-slide">
-          <a href="/products/l5/2705.html" class="img-wrap">
-            <img src="/images/products/l5-consumable/2705/2705.jpg" alt="Solujet 2705B — encre à base de solvant">
-          </a>
-          <div class="slide-body">
-            <span class="label">Solujet 2705B — Encre à base de solvant</span>
-            <p>Encre haute performance pour les lignes de production exigeantes, idéale pour le marquage de dates, lots et codes sur carton, film plastique et emballages.</p>
-            <div class="slide-actions">
-              <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
-              <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les gammes</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="machine-slide">
-          <a href="/products/l5/2707K.html" class="img-wrap">
-            <img src="/images/products/l5-consumable/2707K/2707K.jpg" alt="Solujet 2707K — encre noire pour solvant">
-          </a>
-          <div class="slide-body">
-            <span class="label">Solujet 2707K — Encre noire pour solvant</span>
-            <p>Solution robuste à forte adhérence pour un marquage net et durable sur supports exigeants, avec une excellente lisibilité même en environnement industriel.</p>
-            <div class="slide-actions">
-              <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
-              <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les gammes</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="machine-slide">
-          <a href="/products/l5/2707R.html" class="img-wrap">
-            <img src="/images/products/l5-consumable/2707R/2707R.jpg" alt="Solujet 2707R — encre rouge pour solvant">
-          </a>
-          <div class="slide-body">
-            <span class="label">Solujet 2707R — Encre rouge pour solvant</span>
-            <p>Encre de couleur rouge conçue pour la traçabilité et la signalétique, avec une excellente résistance aux conditions de production et aux surfaces variées.</p>
-            <div class="slide-actions">
-              <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
-              <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les gammes</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="machine-slide">
-          <a href="/products/l5/2770.html" class="img-wrap">
-            <img src="/images/products/l5-consumable/2770/2770.jpg" alt="Hydarajet 2770 — encre à base d'eau">
-          </a>
-          <div class="slide-body">
-            <span class="label">Hydarajet 2770 — Encre à base d'eau</span>
-            <p>Consommable économique et polyvalent pour un marquage précis sur cartons, papiers et emballages légers, tout en respectant les exigences du process.</p>
-            <div class="slide-actions">
-              <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
-              <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les gammes</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="machine-slide">
-          <a href="/products/l5/2780.html" class="img-wrap">
-            <img src="/images/products/l5-consumable/2780/2780.jpg" alt="Hydarajet 2780 — encre à base d'eau haute performance">
-          </a>
-          <div class="slide-body">
-            <span class="label">Hydarajet 2780 — Encre à base d'eau</span>
-            <p>Consommable haute performance pour des impressions nettes, lisibles et homogènes sur supports sensibles, avec un rendement stable sur les lignes rapides.</p>
-            <div class="slide-actions">
-              <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
-              <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les gammes</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="machine-slide">
-          <a href="/products/l5/3770K.html" class="img-wrap">
-            <img src="/images/products/l5-consumable/3770K/3770K.jpg" alt="Smartech 3770K — encre pigmentée">
-          </a>
-          <div class="slide-body">
-            <span class="label">Smartech 3770K — Encre pigmentée</span>
-            <p>Formulation très stable pour les applications de traçabilité, le marquage de codes et la précision graphique sur produits nécessitant une forte qualité visuelle.</p>
-            <div class="slide-actions">
-              <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
-              <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les gammes</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="machine-slide">
-          <a href="/products/l5/CI8500.html" class="img-wrap">
-            <img src="/images/products/l5-consumable/CI8500/CI8500.jpg" alt="Smartech CI8500 — encre pour systèmes CIJ">
-          </a>
-          <div class="slide-body">
-            <span class="label">Smartech CI8500 — Encre spéciale système CIJ</span>
-            <p>Encre dédiée aux systèmes CIJ haute précision, conçue pour offrir une impression durable, nette et reproductible sur les lignes industrielles modernes.</p>
-            <div class="slide-actions">
-              <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
-              <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les gammes</button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <button class="scroll-arrow next" id="slideNext" aria-label="Consommable suivant">
-      <span class="inner"><i class="fa-solid fa-chevron-right"></i></span>
-    </button>
-
-    <div class="slider-dots" id="sliderDots"></div>
-  </div>
-</div>
-
-<div class="container">
-  <h3>hand type coding</h3>
-  <div class="machine-slider-wrap">
-
-    <button class="scroll-arrow prev" id="slidePrev" aria-label="Machine précédente">
-      <span class="inner"><i class="fa-solid fa-chevron-left"></i></span>
-    </button>
-
-    <div class="machine-slider">
-      <div class="machine-track" id="machineTrack">
-
-        <div class="machine-slide">
-          <a href="/products/l6/ej1010r.html" class="img-wrap">
-            <img src="/images/products/l6-handheld/Ej1010r/EJ1010R.jpg" alt="EJ1010R — Machine de marquage laser">
-          </a>
-          <div class="slide-body">
-            <span class="label">EJ1010R — Machine de marquage laser</span>
-            <p>Machine de marquage laser CO2 haute puissance, adaptée aux matériaux difficiles à graver.</p>
-            <div class="slide-actions">
-              <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
-              <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les machines</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="machine-slide">
-          <a href="/products/l6/R10H.html" class="img-wrap">
-            <img src="/images/products/l6-handheld/R10H/R10H.jpg" alt="R10H — Machine de marquage laser">
-          </a>
-            <div class="slide-body">
-              <span class="label">R10H — Machine de marquage laser</span>
-              <p>Machine de marquage laser à fibre, adaptée aux matériaux métalliques et aux applications de marquage haute précision.</p>
-              <div class="slide-actions">
-                <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
-                <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les machines</button>
+            <div class="gamme-body">
+              <span class="gamme-eyebrow">Gamme 04 — Étiquetage</span>
+              <h3>Machine d'étiquetage automatique</h3>
+              <p>La solution EA100 automatise la pose d'étiquettes pour rendre vos opérations plus rapides et plus régulières.</p>
+              <div class="gamme-actions">
+                <button class="btn-primary" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
+                <a href="products/l4/l4.html" class="gamme-link">Voir la gamme <i class="fa-solid fa-arrow-right"></i></a>
               </div>
             </div>
+          </div>
+
+          <div class="machine-gamme-slide">
+            <div class="gamme-img-wrap">
+              <img src="images/products/l5-consumable/2705/2705.jpg" alt="Encres, cartouches et consommables">
+            </div>
+            <div class="gamme-body">
+              <span class="gamme-eyebrow">Gamme 05 — Consommables</span>
+              <h3>Encres, cartouches et consommables</h3>
+              <p>Des encres et consommables adaptés à vos supports pour préserver la qualité et la continuité de votre production.</p>
+              <div class="gamme-actions">
+                <button class="btn-primary" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
+                <a href="products/l5/l5.html" class="gamme-link">Voir la gamme <i class="fa-solid fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="machine-gamme-slide">
+            <div class="gamme-img-wrap">
+              <img src="images/products/l6-handheld/Ej1010r/EJ1010R.jpg" alt="Machines de codage portatives">
+            </div>
+            <div class="gamme-body">
+              <span class="gamme-eyebrow">Gamme 06 — Machines portatives</span>
+              <h3>Machines de codage portatives</h3>
+              <p>Des machines mobiles et autonomes pour marquer vos produits, emballages et pièces directement sur le terrain.</p>
+              <div class="gamme-actions">
+                <button class="btn-primary" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
+                <a href="products/l6/l6.html" class="gamme-link">Voir la gamme <i class="fa-solid fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
         </div>
-
       </div>
+
+      <button class="machines-arrow next" id="machinesNext" aria-label="Gamme suivante">
+        <span class="inner"><i class="fa-solid fa-chevron-right"></i></span>
+      </button>
+
+      <div class="machines-dots" id="machinesDots"></div>
     </div>
-
-    <button class="scroll-arrow next" id="slideNext" aria-label="Machine suivante">
-      <span class="inner"><i class="fa-solid fa-chevron-right"></i></span>
-    </button>
-
-    <div class="slider-dots" id="sliderDots"></div>
   </div>
-</div>
-
+</section>
 
 <!-- ===================== ABOUT ===================== -->
 <section class="section" id="about">
@@ -1320,10 +1061,7 @@
 
     <div class="cards-grid">
       <div class="sol-card reveal">
-       <a href="/products/l1/produits-jet-encre.html" class="solution-image">
-          <img src="images/products/l1-inkjet_coding/hi100/hi100.jpg"
-              alt="Machine de codage jet d'encre HI100">
-        </a>
+        <img src="images/page2_img8.jpeg" alt="Jet d'encre petits caractères" style="width:100%; border-radius:10px; margin-bottom:15px; height:140px; object-fit:cover;">
         <div class="sol-icon"><i class="fa-solid fa-pen-nib"></i></div>
         <h3>Jet d'encre — Petits caractères</h3>
         <p>Marquages alphanumériques sur tous les supports, à destination de tous types d'industries.</p>
@@ -1331,7 +1069,7 @@
       </div>
 
       <div class="sol-card reveal reveal-delay-1">
-        <a href="/products/l2/l2.html"> <img src="images/products/l2-laser_marking/hf300-fiber/hf300.jpg" alt="Jet d'encre grands caractères" style="width:100%; border-radius:10px; margin-bottom:15px; height:140px; object-fit:cover;"></a>
+        <img src="images/page2_img1.jpeg" alt="Jet d'encre grands caractères" style="width:100%; border-radius:10px; margin-bottom:15px; height:140px; object-fit:cover;">
         <div class="sol-icon"><i class="fa-solid fa-barcode"></i></div>
         <h3>Jet d'encre — Grands caractères</h3>
         <p>Logos, textes et codes-barres sur tous supports. Système portatif ou fixe.</p>
@@ -1339,7 +1077,7 @@
       </div>
 
       <div class="sol-card reveal reveal-delay-2">
-        <a href="/products/l3/l3.html"> <img src="images/products/l3-mainteneance-free/R10 PRO/R10pro.jpg" alt="Jet d'encre haute résolution" style="width:100%; border-radius:10px; margin-bottom:15px; height:140px; object-fit:cover;"></a>
+        <img src="images/page2_img2.jpeg" alt="Jet d'encre haute résolution" style="width:100%; border-radius:10px; margin-bottom:15px; height:140px; object-fit:cover;">
         <div class="sol-icon"><i class="fa-solid fa-image"></i></div>
         <h3>Jet d'encre — Haute résolution</h3>
         <p>Logos, textes, codes-barres et images sur tous supports, pour un rendu net et précis.</p>
@@ -1347,7 +1085,7 @@
       </div>
 
       <div class="sol-card reveal reveal-delay-3">
-        <a href="/products/l4/l4.html"><img src="images/products/l4-labeling_machine/EA100.jpg" alt="Imprimante — Transfert thermique" style="width:100%; border-radius:10px; margin-bottom:15px; height:140px; object-fit:cover;"></a>
+        <img src="images/page2_img3.jpeg" alt="Imprimante — Transfert thermique" style="width:100%; border-radius:10px; margin-bottom:15px; height:140px; object-fit:cover;">
         <div class="sol-icon"><i class="fa-solid fa-temperature-high"></i></div>
         <h3>Imprimante — Transfert thermique</h3>
         <p>Logos, textes et codes-barres sur tous supports flexibles, en continu ou intermittent.</p>
@@ -1355,7 +1093,7 @@
       </div>
 
       <div class="sol-card reveal reveal-delay-4">
-        <a href="/products/l5/l5.html"><img src="images/products/l5-consumable/2705/2705.jpg" alt="Imprimante — Laser" style="width:100%; border-radius:10px; margin-bottom:15px; height:140px; object-fit:cover;"></a>
+        <img src="images/page2_img4.jpeg" alt="Imprimante — Laser" style="width:100%; border-radius:10px; margin-bottom:15px; height:140px; object-fit:cover;">
         <div class="sol-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
         <h3>Imprimante — Laser</h3>
         <p>Marquage de traçabilité totalement indélébile, en CO₂ Laser ou Fibre Laser.</p>
@@ -1363,7 +1101,7 @@
       </div>
 
       <div class="sol-card reveal reveal-delay-5">
-        <a href="/products/l6/l6.html"><img src="images/products/l6-handheld/Ej1010r/EJ1010R.jpg" alt="Imprimante — Impression / Pose" style="width:100%; border-radius:10px; margin-bottom:15px; height:140px; object-fit:cover;"></a>
+        <img src="images/page2_img5.jpeg" alt="Imprimante — Impression / Pose" style="width:100%; border-radius:10px; margin-bottom:15px; height:140px; object-fit:cover;">
         <div class="sol-icon"><i class="fa-solid fa-tag"></i></div>
         <h3>Imprimante — Impression / Pose</h3>
         <p>Système complet d'impression et de pose d'étiquettes, sur tous types de supports.</p>
@@ -1373,7 +1111,35 @@
   </div>
 </section>
 
-
+<!-- ===================== CONSOMMABLES ===================== -->
+<section class="section section-alt" id="consumables">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-tag">Consommables &amp; pièces</span>
+      <h2>Tout ce qu'il faut pour garder vos imprimantes actives</h2>
+      <p>Consommables d'origine et pièces de rechange pour l'ensemble de votre parc d'imprimantes industrielles.</p>
+    </div>
+    <div class="consumables-wrap">
+      <div class="consum-card reveal">
+        <img src="images/page2_img6.jpeg" alt="Encres, solvants & additifs" style="width:100%; border-radius:10px; margin-bottom:15px; height:140px; object-fit:cover;">
+        <div class="consum-icon"><i class="fa-solid fa-flask"></i></div>
+        <div><h4>Encres, solvants &amp; additifs</h4><p>Formulations adaptées à chaque technologie de marquage, plus solutions de nettoyage.</p></div>
+      </div>
+      <div class="consum-card reveal reveal-delay-1">
+        <div class="consum-icon"><i class="fa-solid fa-ribbon"></i></div>
+        <div><h4>Ruban, encreur &amp; tête d'impression</h4><p>Consommables de transfert thermique pour une impression nette, cadence après cadence.</p></div>
+      </div>
+      <div class="consum-card reveal reveal-delay-2">
+        <div class="consum-icon"><i class="fa-solid fa-gear"></i></div>
+        <div><h4>Pièces de rechange</h4><p>Filtres, pompes, électrovannes et cartes électroniques pour toutes vos imprimantes.</p></div>
+      </div>
+      <div class="consum-card reveal reveal-delay-3">
+        <div class="consum-icon"><i class="fa-solid fa-truck-fast"></i></div>
+        <div><h4>Livraison &amp; disponibilité</h4><p>Approvisionnement rapide sur l'ensemble du territoire marocain.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ===================== CONSEILS / MAINTENANCE ===================== -->
 <section class="section" id="solution">
@@ -1658,34 +1424,6 @@
 <button class="to-top" id="toTop" aria-label="Retour en haut"><i class="fa-solid fa-arrow-up"></i></button>
 
 <script>
-
-  const track = document.getElementById('machineTrack');
-const slides = track.querySelectorAll('.machine-slide');
-const dotsWrap = document.getElementById('sliderDots');
-const btnPrev = document.getElementById('slidePrev');
-const btnNext = document.getElementById('slideNext');
-let current = 0;
-
-slides.forEach((_, i) => {
-  const dot = document.createElement('button');
-  if (i === 0) dot.classList.add('active');
-  dot.addEventListener('click', () => goTo(i));
-  dotsWrap.appendChild(dot);
-});
-const dots = dotsWrap.querySelectorAll('button');
-
-function goTo(index){
-  current = (index + slides.length) % slides.length;
-  track.style.transform = `translateX(-${current * 100}%)`;
-  dots.forEach((d, i) => d.classList.toggle('active', i === current));
-}
-btnNext.addEventListener('click', () => goTo(current + 1));
-btnPrev.addEventListener('click', () => goTo(current - 1));
-
-let autoTimer = setInterval(() => goTo(current + 1), 3000);
-const sliderWrap = document.querySelector('.machine-slider-wrap');
-sliderWrap.addEventListener('mouseenter', () => clearInterval(autoTimer));
-sliderWrap.addEventListener('mouseleave', () => { autoTimer = setInterval(() => goTo(current + 1), 3000); });
   // ============================================
   // BARRE DE CONTACT — toggle mobile (bouton flottant)
   // ============================================
@@ -1950,10 +1688,42 @@ document.addEventListener('click', (e) => {
   });
 });
 
+  // ============================================
+  // CAROUSEL GAMMES DE PRODUITS (#machines)
+  // ============================================
+  (function(){
+    const track = document.getElementById('machinesTrack');
+    if (!track) return;
+    const slides = track.querySelectorAll('.machine-gamme-slide');
+    const dotsWrap = document.getElementById('machinesDots');
+    const btnPrev = document.getElementById('machinesPrev');
+    const btnNext = document.getElementById('machinesNext');
+    let current = 0;
 
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.setAttribute('aria-label', 'Aller à la gamme ' + (i + 1));
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    });
+    const dots = dotsWrap.querySelectorAll('button');
+
+    function goTo(index){
+      current = (index + slides.length) % slides.length;
+      track.style.transform = `translateX(-${current * 100}%)`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+    btnNext.addEventListener('click', () => goTo(current + 1));
+    btnPrev.addEventListener('click', () => goTo(current - 1));
+
+    let autoTimer = setInterval(() => goTo(current + 1), 5000);
+    const wrap = document.querySelector('.machines-carousel-wrap');
+    wrap.addEventListener('mouseenter', () => clearInterval(autoTimer));
+    wrap.addEventListener('mouseleave', () => { autoTimer = setInterval(() => goTo(current + 1), 5000); });
+  })();
 
   
 </script>
-
 </body>
 </html>
