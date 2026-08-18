@@ -9,110 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-  
-
-  /* ===== SLIDER "1 machine à la fois" ===== */
-.machine-slider-wrap{position:relative; padding:10px 0 50px;}
-.machine-slider{
-  position:relative; overflow:hidden; border-radius:20px;
-  background:var(--panel); border:1px solid var(--line); box-shadow:var(--shadow-md);
-}
-.machine-track{display:flex; transition:transform .5s var(--ease);}
-.machine-slide{
-  flex:0 0 100%; display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:0; min-height:420px;
-}
-.machine-slide .img-wrap{
-  height:100%; min-height:420px; background:#fff; display:flex; align-items:center; justify-content:center;
-  padding:40px; border-right:1px solid var(--line);
-}
-.machine-slide .img-wrap img{max-width:100%; max-height:360px; object-fit:contain;}
-.machine-slide .slide-body{padding:44px 48px;}
-.machine-slide .slide-body .label{
-  color:var(--ink-blue); font-weight:700; font-size:1.5rem; margin-bottom:16px; display:block;
-}
-.machine-slide .slide-body p{color:var(--slate); font-size:.98rem; line-height:1.7; margin-bottom:26px;}
-.machine-slide .slide-body .btn{
-  display:inline-flex; align-items:center; gap:8px; background:var(--ink-blue); color:#fff;
-  padding:13px 26px; border-radius:100px; font-size:.9rem; font-weight:600; border:none; cursor:pointer;
-  transition:background .25s, transform .25s;
-}
-.machine-slide .slide-body .btn:hover{background:var(--circuit-blue); transform:translateY(-2px);}
-
-.slide-actions{display:flex; gap:12px; flex-wrap:wrap;}
-.btn-outline{
-  display:inline-flex; align-items:center; gap:8px; background:transparent; color:var(--ink-blue);
-  padding:13px 26px; border-radius:100px; font-size:.9rem; font-weight:600;
-  border:1.5px solid var(--line); cursor:pointer; transition:border-color .25s, transform .25s, color .25s;
-}
-.btn-outline:hover{border-color:var(--ink-blue); transform:translateY(-2px);}
-
-/* ---- flèches circulaires (statiques, sans animation) ---- */
-.scroll-arrow{
-  position:absolute; top:50%; transform:translateY(-50%);
-  width:56px; height:56px; border-radius:50%; z-index:5;
-  padding:3px; cursor:pointer; border:none;
-  background:conic-gradient(from 0deg, var(--ink-blue), var(--signal-red), var(--ink-blue));
-  box-shadow:var(--shadow-md);
-  transition:transform .25s var(--ease);
-}
-.scroll-arrow:hover{transform:translateY(-50%) scale(1.08);}
-.scroll-arrow .inner{
-  width:100%; height:100%; border-radius:50%; background:#fff;
-  display:flex; align-items:center; justify-content:center;
-  color:var(--ink-blue); font-size:1.2rem; transition:color .25s, background .25s;
-}
-.scroll-arrow:hover .inner{background:var(--ink-blue); color:#fff;}
-.scroll-arrow.prev{left:-22px;}
-.scroll-arrow.next{right:-22px;}
-
-/* ---- points indicateurs ---- */
-.slider-dots{display:flex; justify-content:center; gap:8px; margin-top:20px;}
-.slider-dots button{
-  width:9px; height:9px; border-radius:50%; border:none; background:var(--line); cursor:pointer;
-  transition:background .25s, transform .25s;
-}
-.slider-dots button.active{background:var(--ink-blue); transform:scale(1.3);}
-
-@media (max-width:820px){
-  .machine-slide{grid-template-columns:1fr; min-height:auto;}
-  .machine-slide .img-wrap{border-right:none; border-bottom:1px solid var(--line); min-height:260px; padding:26px;}
-  .machine-slide .slide-body{padding:28px;}
-  .scroll-arrow{width:44px; height:44px;}
-  .scroll-arrow.prev{left:6px;} .scroll-arrow.next{right:6px;}
-}
-
-
-.has-dropdown{position:relative;}
-  /* APRÈS */
-.dropdown-menu{
-  position:absolute; top:100%; left:50%; transform:translateX(-50%) translateY(4px);
-  background:var(--panel); border:1px solid var(--line); border-radius:12px;
-  box-shadow:var(--shadow-md); min-width:260px; padding:10px;
-  margin-top:14px; /* comble le vide visuellement, sans créer de trou dans la zone de survol */
-  opacity:0; pointer-events:none; transition:opacity .2s, transform .2s;
-  display:flex; flex-direction:column; gap:2px;
-}
-/* Zone tampon invisible qui prolonge la zone de survol entre le lien et le menu */
-.has-dropdown::after{
-  content:''; position:absolute; top:100%; left:0; right:0; height:14px;
-}
-.has-dropdown.open .dropdown-menu{
-  opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(0);
-}
-
-  .dropdown-menu a{padding:10px 12px; border-radius:8px; font-size:.86rem; color:var(--graphite);}
-  .dropdown-menu a:hover{background:var(--steel-white); color:var(--ink-blue);}
-  @media (max-width:760px){
-    .dropdown-menu{position:static; opacity:1; pointer-events:auto; transform:none; box-shadow:none; border:none; display:none; margin-top:6px;}
-    .has-dropdown.open .dropdown-menu{display:flex;}
-  }
-
-
-
-  .lang-switch{display:flex; gap:4px; margin-left:16px;}
-.lang-switch a{font-size:.8rem; font-weight:700; padding:5px 9px; border-radius:6px; color:var(--slate);}
-.lang-switch a.active{background:var(--ink-blue); color:#fff;}
-
 
   :root{
     --ink-blue:#0B3C6D;
@@ -219,7 +115,68 @@
   .burger.active span:nth-child(2){opacity:0;}
   .burger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 
+  .has-dropdown{position:relative;}
+  .dropdown-menu{
+    position:absolute; top:100%; left:50%; transform:translateX(-50%) translateY(4px);
+    background:var(--panel); border:1px solid var(--line); border-radius:12px;
+    box-shadow:var(--shadow-md); min-width:260px; padding:10px;
+    margin-top:14px;
+    opacity:0; pointer-events:none; transition:opacity .2s, transform .2s;
+    display:flex; flex-direction:column; gap:2px;
+  }
+  .has-dropdown::after{
+    content:''; position:absolute; top:100%; left:0; right:0; height:14px;
+  }
+  .has-dropdown.open .dropdown-menu{
+    opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(0);
+  }
+  .dropdown-menu a{padding:10px 12px; border-radius:8px; font-size:.86rem; color:var(--graphite);}
+  .dropdown-menu a:hover{background:var(--steel-white); color:var(--ink-blue);}
+  @media (max-width:760px){
+    .dropdown-menu{position:static; opacity:1; pointer-events:auto; transform:none; box-shadow:none; border:none; display:none; margin-top:6px;}
+    .has-dropdown.open .dropdown-menu{display:flex;}
+  }
+
+  .lang-switch{display:flex; gap:4px; margin-left:16px;}
+  .lang-switch a{font-size:.8rem; font-weight:700; padding:5px 9px; border-radius:6px; color:var(--slate);}
+  .lang-switch a.active{background:var(--ink-blue); color:#fff;}
+
   /* ---------- HERO ---------- */
+
+  /* ---- Fond photo en fondu (3 images) ---- */
+  .hero-bg{
+    position:absolute; inset:0; z-index:0; overflow:hidden;
+  }
+  .hero-bg .bg-layer{
+    position:absolute; inset:0;
+    background-size:cover; background-position:center;
+    opacity:0;
+    filter:brightness(1.05) saturate(0.9);
+    animation:heroBgFade 15s infinite;
+  }
+  .hero-bg .bg-layer:nth-child(1){background-image:url('/images/index/b1.jpg'); animation-delay:0s;}
+  .hero-bg .bg-layer:nth-child(2){background-image:url('/images/index/b2.jpg'); animation-delay:5s;}
+  .hero-bg .bg-layer:nth-child(3){background-image:url('/images/index/b3.png'); animation-delay:10s;}
+  @keyframes heroBgFade{
+    0%, 100%{opacity:0;}
+    5%{opacity:1;}
+    28%{opacity:1;}
+    34%{opacity:0;}
+  }
+  /* voile clair pour garder le texte lisible par-dessus les photos */
+  .hero-bg::after{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(100deg, rgba(246,249,252,.60) 0%, rgba(246,249,252,.60) 45%, rgba(246,249,252,.6) 100%);
+  }
+
+  /* le hero passe en une seule colonne, plus de visuel latéral */
+  .hero-inner{grid-template-columns:1fr; max-width:760px;}
+
+  /* stats affichées sous les CTA, en ligne, sans carte */
+  .hero-stats{display:flex; gap:36px; margin-top:38px; flex-wrap:wrap;}
+  .hero-stats .stat-num{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.6rem; color:var(--ink-blue);}
+  .hero-stats .stat-label{font-size:.72rem; color:var(--slate); text-transform:uppercase; letter-spacing:.03em; margin-top:2px;}
+
   .hero{
     min-height:100svh;
     display:flex; align-items:center;
@@ -240,7 +197,7 @@
     mask-image:linear-gradient(to bottom, black, transparent 85%);
   }
   .hero-inner{
-    display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:center;
+    display:grid; gap:56px; align-items:center;
     position:relative; z-index:2;
   }
   .eyebrow{
@@ -257,9 +214,13 @@
     font-size:clamp(2.3rem, 5.4vw, 4.1rem);
     font-weight:700; color:var(--ink-blue); line-height:1.04;
     margin-bottom:22px;
+    text-shadow: 0 2px 24px rgba(255,255,255,.6);
   }
   .hero h1 .accent{color:var(--signal-red);}
-  .hero p.lead{font-size:1.13rem; color:var(--slate); max-width:520px; margin-bottom:34px;}
+  .hero p.lead{
+    font-size:1.13rem; color:var(--slate); max-width:520px; margin-bottom:34px;
+    text-shadow: 0 2px 16px rgba(255,255,255,.5);
+  }
 
   /* Print/marking bar signature element */
   .mark-strip{
@@ -302,24 +263,6 @@
   .btn-ghost{background:transparent; color:var(--ink-blue); border:1.5px solid var(--line);}
   .btn-ghost:hover{border-color:var(--ink-blue); transform:translateY(-3px);}
 
-  .hero-visual{position:relative; display:flex; align-items:center; justify-content:center;}
-  .pipe-card{
-    background:var(--panel); border-radius:20px; padding:26px;
-    box-shadow:var(--shadow-md); border:1px solid var(--line);
-    width:100%; max-width:400px;
-    animation:floaty 5s ease-in-out infinite;
-  }
-  @keyframes floaty{0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);}}
-  .pipe-visual{
-    border-radius:14px; margin-bottom:18px;
-    display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;
-  }
-  .pipe-visual img{width:100%; height:auto; display:block; border-radius:14px;}
-  .stat-row{display:flex; justify-content:space-between; text-align:center;}
-  .stat-row div{flex:1;}
-  .stat-num{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.5rem; color:var(--ink-blue);}
-  .stat-label{font-size:.7rem; color:var(--slate); text-transform:uppercase; letter-spacing:.03em; margin-top:2px;}
-
   .scroll-cue{
     position:absolute; bottom:26px; left:50%; transform:translateX(-50%);
     display:flex; flex-direction:column; align-items:center; gap:6px;
@@ -327,6 +270,78 @@
   }
   .scroll-cue .line{width:1px; height:34px; background:linear-gradient(to bottom, var(--slate), transparent); animation:scrollLine 1.8s infinite;}
   @keyframes scrollLine{0%{opacity:0; transform:scaleY(0.3); transform-origin:top;} 50%{opacity:1; transform:scaleY(1);} 100%{opacity:0; transform:scaleY(1);}}
+
+  /* ---------- SLIDER "1 machine à la fois" (réutilisé pour toutes les gammes) ---------- */
+  .machine-slider-wrap{position:relative; padding:10px 0 50px;}
+  .machine-slider{
+    position:relative; overflow:hidden; border-radius:20px;
+    background:var(--panel); border:1px solid var(--line); box-shadow:var(--shadow-md);
+  }
+  .machine-track{display:flex; transition:transform .5s var(--ease);}
+  .machine-slide{
+    flex:0 0 100%; display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:0; min-height:420px;
+  }
+  .machine-slide .img-wrap{
+    height:100%; min-height:420px; background:#fff; display:flex; align-items:center; justify-content:center;
+    padding:40px; border-right:1px solid var(--line);
+  }
+  .machine-slide .img-wrap img{max-width:100%; max-height:360px; object-fit:contain;}
+  .machine-slide .slide-body{padding:44px 48px;}
+  .machine-slide .slide-body .label{
+    color:var(--ink-blue); font-weight:700; font-size:1.5rem; margin-bottom:16px; display:block;
+  }
+  .machine-slide .slide-body p{color:var(--slate); font-size:.98rem; line-height:1.7; margin-bottom:26px;}
+  .machine-slide .slide-body .btn{
+    display:inline-flex; align-items:center; gap:8px; background:var(--ink-blue); color:#fff;
+    padding:13px 26px; border-radius:100px; font-size:.9rem; font-weight:600; border:none; cursor:pointer;
+    transition:background .25s, transform .25s;
+  }
+  .machine-slide .slide-body .btn:hover{background:var(--circuit-blue); transform:translateY(-2px);}
+
+  .slide-actions{display:flex; gap:12px; flex-wrap:wrap;}
+  .btn-outline{
+    display:inline-flex; align-items:center; gap:8px; background:transparent; color:var(--ink-blue);
+    padding:13px 26px; border-radius:100px; font-size:.9rem; font-weight:600;
+    border:1.5px solid var(--line); cursor:pointer; transition:border-color .25s, transform .25s, color .25s;
+  }
+  .btn-outline:hover{border-color:var(--ink-blue); transform:translateY(-2px);}
+
+  .scroll-arrow{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:56px; height:56px; border-radius:50%; z-index:5;
+    padding:3px; cursor:pointer; border:none;
+    background:conic-gradient(from 0deg, var(--ink-blue), var(--signal-red), var(--ink-blue));
+    box-shadow:var(--shadow-md);
+    transition:transform .25s var(--ease);
+  }
+  .scroll-arrow:hover{transform:translateY(-50%) scale(1.08);}
+  .scroll-arrow .inner{
+    width:100%; height:100%; border-radius:50%; background:#fff;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--ink-blue); font-size:1.2rem; transition:color .25s, background .25s;
+  }
+  .scroll-arrow:hover .inner{background:var(--ink-blue); color:#fff;}
+  .scroll-arrow.prev{left:-22px;}
+  .scroll-arrow.next{right:-22px;}
+
+  .slider-dots{display:flex; justify-content:center; gap:8px; margin-top:20px;}
+  .slider-dots button{
+    width:9px; height:9px; border-radius:50%; border:none; background:var(--line); cursor:pointer;
+    transition:background .25s, transform .25s;
+  }
+  .slider-dots button.active{background:var(--ink-blue); transform:scale(1.3);}
+
+  .gamme-heading{
+    font-size:1.2rem; color:var(--ink-blue); margin:48px 0 14px;
+  }
+
+  @media (max-width:820px){
+    .machine-slide{grid-template-columns:1fr; min-height:auto;}
+    .machine-slide .img-wrap{border-right:none; border-bottom:1px solid var(--line); min-height:260px; padding:26px;}
+    .machine-slide .slide-body{padding:28px;}
+    .scroll-arrow{width:44px; height:44px;}
+    .scroll-arrow.prev{left:6px;} .scroll-arrow.next{right:6px;}
+  }
 
   /* ---------- SECTION HEADERS ---------- */
   .section{padding:110px 0;}
@@ -539,7 +554,6 @@
   .to-top.show{opacity:1; pointer-events:auto; transform:translateY(0) scale(1);}
   .to-top:hover{background:var(--circuit-blue);}
 
-  /* ---------- RESPONSIVE ---------- */
   /* ---------- BARRE DE CONTACT VERTICALE FIXE ---------- */
   .contact-sidebar{
     position:fixed; top:50%; right:0; transform:translateY(-50%); z-index:1500;
@@ -595,8 +609,6 @@
   @media (min-width:761px){ .sidebar-fab{display:none;} }
 
   @media (max-width:960px){
-    .hero-inner{grid-template-columns:1fr;}
-    .hero-visual{order:-1; max-width:380px; margin:0 auto 20px;}
     .about-grid, .assist-wrap, .contact-wrap{grid-template-columns:1fr; gap:36px;}
     .assist-wrap{padding:44px 28px;}
     .conseils-grid{grid-template-columns:1fr;}
@@ -615,9 +627,6 @@
     .burger{display:flex;}
     .section{padding:76px 0;}
     .brand-text .b2{font-size:.6rem;}
-  }
-  @media (max-width:520px){
-    .stat-row{flex-wrap:wrap; gap:14px;}
   }
 
   /* ---------- CONVERSION BLOCK (devis / visite) ---------- */
@@ -712,12 +721,10 @@
     .modal-form .frow{grid-template-columns:1fr;}
   }
 
-
+  @media (prefers-reduced-motion: reduce){
     *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
   }
 
-
-  
 </style>
 
 <script src="i18n.js" defer></script>
@@ -751,33 +758,31 @@
 </aside>
 <button class="sidebar-fab" id="sidebarFab" aria-label="Ouvrir le contact rapide" aria-expanded="false">
   <i class="fa-solid fa-headset"></i>
-</button>S
+</button>
 
 <!-- ===================== HEADER / NAV ===================== -->
 <header id="siteHeader">
   <nav>
     <a href="#top" class="brand">
       <div class="brand-mark" style="width:auto;height:auto;background:none;border:none;box-shadow:none;">
-        <img src="images/index//page2_img7.jpeg" alt="RM MARK" style="height:42px;width:auto;object-fit:contain;">
+        <img src="images/index/page2_img7.jpeg" alt="RM MARK" style="height:42px;width:auto;object-fit:contain;">
       </div>
       <div class="brand-text">
         <span class="b1">RM MARK</span>
         <span class="b2">Coding &amp; Marking Services</span>
       </div>
     </a>
-    
+
     <div class="lang-switch">
         <a href="#" data-lang="fr" onclick="setLang('fr'); return false;">FR</a>
         <a href="#" data-lang="en" onclick="setLang('en'); return false;">EN</a>
     </div>
-
 
     <ul class="nav-links" id="navLinks">
       <li><a href="#top">Accueil</a></li>
 
       <li class="has-dropdown">
         <a href="#solutions">Products <i class="fa-solid fa-chevron-down" style="font-size:.7em;margin-left:4px;"></i></a>
-          <!-- APRÈS — dans le dropdown "Products" -->
         <div class="dropdown-menu">
           <a href="products/l1/produits-jet-encre.html">Jet d'encre</a>
           <a href="products/l2/l2.html">Marquage Laser</a>
@@ -785,11 +790,11 @@
           <a href="products/l4/l4.html">Labeling</a>
           <a href="products/l5/l5.html">consumables</a>
           <a href="products/l6/l6.html">Hand type coding devices</a>
-          <a href="#solutions">Impression / Pose d'étiquettes</a>
+          <a href="products/l7/l7.html">machine dikai</a>
         </div>
       </li>
 
-      <li><a href="#solution">Solution</a></li>
+      <li><a href="products/l1/produits-jet-encre.html">Solution</a></li>
 
       <li><a href="#" class="nav-cta" onclick="openModal('modalDevis'); return false;">Demande d'information</a></li>
     </ul>
@@ -799,10 +804,14 @@
 
 <!-- ===================== HERO ===================== -->
 <section class="hero" id="top">
+  <div class="hero-bg">
+    <div class="bg-layer"></div>
+    <div class="bg-layer"></div>
+    <div class="bg-layer"></div>
+  </div>
   <div class="hero-grid"></div>
   <div class="container hero-inner">
     <div class="hero-copy">
-      <!-- APRÈS (avec data-i18n) -->
       <div class="eyebrow"><span class="dot"></span> <span data-i18n="hero.eyebrow">Marquage &amp; codage industriel — Maroc</span></div>
       <h1><span data-i18n="hero.title_1">On imprime la</span> <span class="accent" data-i18n="hero.title_accent">traçabilité</span> <span data-i18n="hero.title_2">de votre marque, à chaque cadence.</span></h1>
       <p class="lead" data-i18n="hero.lead">Depuis plus de 15 ans, RM MARK conçoit des solutions de marquage industriel — du jet d'encre à la technologie laser — pour identifier et tracer vos produits, sur tout support, à toute vitesse.</p>
@@ -817,18 +826,11 @@
         <a href="#solutions" class="btn btn-primary"><i class="fa-solid fa-layer-group"></i> Nos solutions</a>
         <a href="#contact" class="btn btn-ghost"><i class="fa-solid fa-phone"></i> Assistance technique</a>
       </div>
-    </div>
 
-    <div class="hero-visual">
-      <div class="pipe-card">
-        <div class="pipe-visual">
-    <img src="images/index/page1_img1.jpeg" alt="Solutions de marquage RM MARK" style="width:100%; border-radius:14px; height:auto; max-height:280px; object-fit:cover;">
-</div>
-        <div class="stat-row">
-          <div><div class="stat-num">15+</div><div class="stat-label">Ans d'expertise</div></div>
-          <div><div class="stat-num">280mm</div><div class="stat-label">Hauteur max.</div></div>
-          <div><div class="stat-num">300/min</div><div class="stat-label">Cadence</div></div>
-        </div>
+      <div class="hero-stats">
+        <div><div class="stat-num">15+</div><div class="stat-label">Ans d'expertise</div></div>
+        <div><div class="stat-num">280mm</div><div class="stat-label">Hauteur max.</div></div>
+        <div><div class="stat-num">300/min</div><div class="stat-label">Cadence</div></div>
       </div>
     </div>
   </div>
@@ -858,19 +860,16 @@
   </div>
 </div>
 
-<!-- ===== SLIDER "1 machine à la fois" ===== -->
- 
-   
-<div class="container">
-  <h3>jet encre</h3>
-  <div class="machine-slider-wrap">
+<!-- ===================== GAMMES DE PRODUITS — SLIDERS ===================== -->
+<div class="container" id="solutions-sliders">
 
-    <button class="scroll-arrow prev" id="slidePrev" aria-label="Machine précédente">
+  <h3 class="gamme-heading">Jet d'encre</h3>
+  <div class="machine-slider-wrap">
+    <button class="scroll-arrow prev" aria-label="Machine précédente">
       <span class="inner"><i class="fa-solid fa-chevron-left"></i></span>
     </button>
-
     <div class="machine-slider">
-      <div class="machine-track" id="machineTrack">
+      <div class="machine-track">
 
         <div class="machine-slide">
           <a href="/products/l1/l1_hi100.html" class="img-wrap">
@@ -890,14 +889,14 @@
           <a href="/products/l1/l1_hi200.html" class="img-wrap">
             <img src="/images/products/l1-inkjet_coding/hi200/hi200.jpg" alt="Hi200 — Machine de codage jet d'encre">
           </a>
-            <div class="slide-body">
-              <span class="label">Hi200 — Machine de codage Jet d'encre</span>
-              <p>Version avancée avec tour de signalisation lumineuse et écran tactile, pensée pour un suivi visuel de production en temps réel.</p>
-              <div class="slide-actions">
-                <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
-                <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les machines</button>
-              </div>
+          <div class="slide-body">
+            <span class="label">Hi200 — Machine de codage Jet d'encre</span>
+            <p>Version avancée avec tour de signalisation lumineuse et écran tactile, pensée pour un suivi visuel de production en temps réel.</p>
+            <div class="slide-actions">
+              <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
+              <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les machines</button>
             </div>
+          </div>
         </div>
 
         <div class="machine-slide">
@@ -916,25 +915,77 @@
 
       </div>
     </div>
-
-    <button class="scroll-arrow next" id="slideNext" aria-label="Machine suivante">
+    <button class="scroll-arrow next" aria-label="Machine suivante">
       <span class="inner"><i class="fa-solid fa-chevron-right"></i></span>
     </button>
-
-    <div class="slider-dots" id="sliderDots"></div>
+    <div class="slider-dots"></div>
   </div>
-</div>
 
-<div class="container">
-  <h3>marquage laser</h3> 
+  <h3 class="gamme-heading">Machines Dikai</h3>
   <div class="machine-slider-wrap">
-
-    <button class="scroll-arrow prev" id="slidePrev" aria-label="Machine précédente">
+    <button class="scroll-arrow prev" aria-label="Machine précédente">
       <span class="inner"><i class="fa-solid fa-chevron-left"></i></span>
     </button>
-
     <div class="machine-slider">
-      <div class="machine-track" id="machineTrack">
+      <div class="machine-track">
+
+        <div class="machine-slide">
+          <a href="/products/l7/d03.html" class="img-wrap">
+            <img src="/images/products/l7/d03/d03.jpg" alt="D03S — Machine de transfert thermique">
+          </a>
+          <div class="slide-body">
+            <span class="label">D03S — Machine de transfert thermique</span>
+            <p>Imprimante à transfert thermique (TTO) compacte et économique, adaptée à l'impression de date, lot, code-barres et QR code sur emballages souples, films et papiers.</p>
+            <div class="slide-actions">
+              <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
+              <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les machines</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="machine-slide">
+          <a href="/products/l7/d05.html" class="img-wrap">
+            <img src="/images/products/l7/d05/d05.jpg" alt="D05S — Machine de transfert thermique">
+          </a>
+          <div class="slide-body">
+            <span class="label">D05S — Machine de transfert thermique</span>
+            <p>Version avancée de la gamme TTO, avec tête 32 ou 53 mm, interface intuitive et impression nette pour un suivi visuel de production en temps réel.</p>
+            <div class="slide-actions">
+              <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
+              <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les machines</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="machine-slide">
+          <a href="/products/l7/d06.html" class="img-wrap">
+            <img src="/images/products/l7/d06/d06.png" alt="D06S — Machine de transfert thermique intelligente">
+          </a>
+          <div class="slide-body">
+            <span class="label">D06S — Transfert thermique intelligent</span>
+            <p>Nouvelle génération d'imprimante TTO intelligente, écran tactile 10,1 pouces, cadence et débit accrus, gestion à distance et intégration avec systèmes de vision.</p>
+            <div class="slide-actions">
+              <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
+              <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les machines</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <button class="scroll-arrow next" aria-label="Machine suivante">
+      <span class="inner"><i class="fa-solid fa-chevron-right"></i></span>
+    </button>
+    <div class="slider-dots"></div>
+  </div>
+
+  <h3 class="gamme-heading">Marquage laser</h3>
+  <div class="machine-slider-wrap">
+    <button class="scroll-arrow prev" aria-label="Machine précédente">
+      <span class="inner"><i class="fa-solid fa-chevron-left"></i></span>
+    </button>
+    <div class="machine-slider">
+      <div class="machine-track">
 
         <div class="machine-slide">
           <a href="/products/l2/l2-hc300-co2-laser.html" class="img-wrap">
@@ -954,44 +1005,36 @@
           <a href="/products/l2/l2-hf300_marking.html" class="img-wrap">
             <img src="/images/products/l2-laser_marking/hf300-fiber/hf300.jpg" alt="HF300 Marking — Machine de marquage laser">
           </a>
-            <div class="slide-body">
-              <span class="label">HF300 Marking — Machine de marquage laser</span>
-              <p>Machine de marquage laser à fibre, adaptée aux matériaux métalliques et aux applications de marquage haute précision.</p>
-              <div class="slide-actions">
-                <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
-                <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les machines</button>
-              </div>
+          <div class="slide-body">
+            <span class="label">HF300 Marking — Machine de marquage laser</span>
+            <p>Machine de marquage laser à fibre, adaptée aux matériaux métalliques et aux applications de marquage haute précision.</p>
+            <div class="slide-actions">
+              <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
+              <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les machines</button>
             </div>
+          </div>
         </div>
 
       </div>
     </div>
-
-    <button class="scroll-arrow next" id="slideNext" aria-label="Machine suivante">
+    <button class="scroll-arrow next" aria-label="Machine suivante">
       <span class="inner"><i class="fa-solid fa-chevron-right"></i></span>
     </button>
-
-    <div class="slider-dots" id="sliderDots"></div>
+    <div class="slider-dots"></div>
   </div>
-</div>
 
-
-<div class="container">
-  <h3>maintenance-free</h3>
+  <h3 class="gamme-heading">Maintenance-free</h3>
   <div class="machine-slider-wrap">
-
-    <button class="scroll-arrow prev" id="slidePrev" aria-label="Machine précédente">
+    <button class="scroll-arrow prev" aria-label="Machine précédente">
       <span class="inner"><i class="fa-solid fa-chevron-left"></i></span>
     </button>
-
     <div class="machine-slider">
-      <div class="machine-track" id="machineTrack">
+      <div class="machine-track">
 
         <div class="machine-slide">
           <a href="/products/l3/10pro.html" class="img-wrap">
             <img src="/images/products/l3-mainteneance-free/R10 PRO/R10pro.jpg" alt="R10 PRO — Machine de marquage maintenance-free">
           </a>
-
           <div class="slide-body">
             <span class="label">R10 PRO — Machine de marquage maintenance-free</span>
             <p>Système de maintenance-free compact et fiable, adapté aux lignes de production standards nécessitant un marquage rapide et net.</p>
@@ -1006,14 +1049,14 @@
           <a href="/products/l3/10e.html" class="img-wrap">
             <img src="/images/products/l3-mainteneance-free/R10E/R10E.png" alt="R10E — Machine de marquage maintenance-free">
           </a>
-            <div class="slide-body">
-              <span class="label">R10E — Machine de marquage maintenance-free</span>
-              <p>Version avancée avec tour de signalisation lumineuse et écran tactile, pensée pour un suivi visuel de production en temps réel.</p>
-              <div class="slide-actions">
-                <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
-                <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les machines</button>
-              </div>
+          <div class="slide-body">
+            <span class="label">R10E — Machine de marquage maintenance-free</span>
+            <p>Version avancée avec tour de signalisation lumineuse et écran tactile, pensée pour un suivi visuel de production en temps réel.</p>
+            <div class="slide-actions">
+              <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
+              <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les machines</button>
             </div>
+          </div>
         </div>
 
         <div class="machine-slide">
@@ -1074,25 +1117,19 @@
 
       </div>
     </div>
-
-    <button class="scroll-arrow next" id="slideNext" aria-label="Machine suivante">
+    <button class="scroll-arrow next" aria-label="Machine suivante">
       <span class="inner"><i class="fa-solid fa-chevron-right"></i></span>
     </button>
-
-    <div class="slider-dots" id="sliderDots"></div>
+    <div class="slider-dots"></div>
   </div>
-</div>
 
-<div class="container">
-  <h3>consumable</h3>
+  <h3 class="gamme-heading">Consommables</h3>
   <div class="machine-slider-wrap">
-
-    <button class="scroll-arrow prev" id="slidePrev" aria-label="Consommable précédent">
+    <button class="scroll-arrow prev" aria-label="Consommable précédent">
       <span class="inner"><i class="fa-solid fa-chevron-left"></i></span>
     </button>
-
     <div class="machine-slider">
-      <div class="machine-track" id="machineTrack">
+      <div class="machine-track">
 
         <div class="machine-slide">
           <a href="/products/l5/2705.html" class="img-wrap">
@@ -1194,33 +1231,27 @@
 
       </div>
     </div>
-
-    <button class="scroll-arrow next" id="slideNext" aria-label="Consommable suivant">
+    <button class="scroll-arrow next" aria-label="Consommable suivant">
       <span class="inner"><i class="fa-solid fa-chevron-right"></i></span>
     </button>
-
-    <div class="slider-dots" id="sliderDots"></div>
+    <div class="slider-dots"></div>
   </div>
-</div>
 
-<div class="container">
-  <h3>hand type coding</h3>
+  <h3 class="gamme-heading">Machines portatives</h3>
   <div class="machine-slider-wrap">
-
-    <button class="scroll-arrow prev" id="slidePrev" aria-label="Machine précédente">
+    <button class="scroll-arrow prev" aria-label="Machine précédente">
       <span class="inner"><i class="fa-solid fa-chevron-left"></i></span>
     </button>
-
     <div class="machine-slider">
-      <div class="machine-track" id="machineTrack">
+      <div class="machine-track">
 
         <div class="machine-slide">
           <a href="/products/l6/ej1010r.html" class="img-wrap">
-            <img src="/images/products/l6-handheld/Ej1010r/EJ1010R.jpg" alt="EJ1010R — Machine de marquage laser">
+            <img src="/images/products/l6-handheld/Ej1010r/EJ1010R.jpg" alt="EJ1010R — Machine de codage portative">
           </a>
           <div class="slide-body">
-            <span class="label">EJ1010R — Machine de marquage laser</span>
-            <p>Machine de marquage laser CO2 haute puissance, adaptée aux matériaux difficiles à graver.</p>
+            <span class="label">EJ1010R — Machine de codage portative</span>
+            <p>Machine portative légère et autonome pour marquer vos produits, emballages et pièces directement sur le terrain.</p>
             <div class="slide-actions">
               <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
               <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les machines</button>
@@ -1230,29 +1261,27 @@
 
         <div class="machine-slide">
           <a href="/products/l6/R10H.html" class="img-wrap">
-            <img src="/images/products/l6-handheld/R10H/R10H.jpg" alt="R10H — Machine de marquage laser">
+            <img src="/images/products/l6-handheld/R10H/R10H.jpg" alt="R10H — Machine de codage portative">
           </a>
-            <div class="slide-body">
-              <span class="label">R10H — Machine de marquage laser</span>
-              <p>Machine de marquage laser à fibre, adaptée aux matériaux métalliques et aux applications de marquage haute précision.</p>
-              <div class="slide-actions">
-                <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
-                <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les machines</button>
-              </div>
+          <div class="slide-body">
+            <span class="label">R10H — Machine de codage portative</span>
+            <p>Machine portative robuste, adaptée aux applications de marquage mobile en environnement industriel exigeant.</p>
+            <div class="slide-actions">
+              <button class="btn" onclick="openModal('modalDevis')"><i class="fa-solid fa-file-invoice"></i> Demander un devis</button>
+              <button class="btn-outline" onclick="scrollToAllMachines()"><i class="fa-solid fa-th-large"></i> Toutes les machines</button>
             </div>
+          </div>
         </div>
 
       </div>
     </div>
-
-    <button class="scroll-arrow next" id="slideNext" aria-label="Machine suivante">
+    <button class="scroll-arrow next" aria-label="Machine suivante">
       <span class="inner"><i class="fa-solid fa-chevron-right"></i></span>
     </button>
-
-    <div class="slider-dots" id="sliderDots"></div>
+    <div class="slider-dots"></div>
   </div>
-</div>
 
+</div>
 
 <!-- ===================== ABOUT ===================== -->
 <section class="section" id="about">
@@ -1372,8 +1401,6 @@
     </div>
   </div>
 </section>
-
-
 
 <!-- ===================== CONSEILS / MAINTENANCE ===================== -->
 <section class="section" id="solution">
@@ -1659,33 +1686,54 @@
 
 <script>
 
-  const track = document.getElementById('machineTrack');
-const slides = track.querySelectorAll('.machine-slide');
-const dotsWrap = document.getElementById('sliderDots');
-const btnPrev = document.getElementById('slidePrev');
-const btnNext = document.getElementById('slideNext');
-let current = 0;
+  // ============================================
+  // SLIDERS "1 machine à la fois" — initialisation générique
+  // Fonctionne pour n'importe quel nombre de .machine-slider-wrap
+  // sur la page, sans avoir besoin d'IDs uniques.
+  // ============================================
+  function initMachineSliders(){
+    document.querySelectorAll('.machine-slider-wrap').forEach(wrap => {
+      const track = wrap.querySelector('.machine-track');
+      if (!track) return;
+      const slides = track.querySelectorAll('.machine-slide');
+      const dotsWrap = wrap.querySelector('.slider-dots');
+      const btnPrev = wrap.querySelector('.scroll-arrow.prev');
+      const btnNext = wrap.querySelector('.scroll-arrow.next');
+      let current = 0;
 
-slides.forEach((_, i) => {
-  const dot = document.createElement('button');
-  if (i === 0) dot.classList.add('active');
-  dot.addEventListener('click', () => goTo(i));
-  dotsWrap.appendChild(dot);
-});
-const dots = dotsWrap.querySelectorAll('button');
+      if (dotsWrap) {
+        dotsWrap.innerHTML = '';
+        slides.forEach((_, i) => {
+          const dot = document.createElement('button');
+          dot.setAttribute('aria-label', 'Aller à l\u2019élément ' + (i + 1));
+          if (i === 0) dot.classList.add('active');
+          dot.addEventListener('click', () => goTo(i));
+          dotsWrap.appendChild(dot);
+        });
+      }
+      const dots = dotsWrap ? dotsWrap.querySelectorAll('button') : [];
 
-function goTo(index){
-  current = (index + slides.length) % slides.length;
-  track.style.transform = `translateX(-${current * 100}%)`;
-  dots.forEach((d, i) => d.classList.toggle('active', i === current));
-}
-btnNext.addEventListener('click', () => goTo(current + 1));
-btnPrev.addEventListener('click', () => goTo(current - 1));
+      function goTo(index){
+        current = (index + slides.length) % slides.length;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      }
+      if (btnNext) btnNext.addEventListener('click', () => goTo(current + 1));
+      if (btnPrev) btnPrev.addEventListener('click', () => goTo(current - 1));
 
-let autoTimer = setInterval(() => goTo(current + 1), 3000);
-const sliderWrap = document.querySelector('.machine-slider-wrap');
-sliderWrap.addEventListener('mouseenter', () => clearInterval(autoTimer));
-sliderWrap.addEventListener('mouseleave', () => { autoTimer = setInterval(() => goTo(current + 1), 3000); });
+      let autoTimer = setInterval(() => goTo(current + 1), 4000);
+      wrap.addEventListener('mouseenter', () => clearInterval(autoTimer));
+      wrap.addEventListener('mouseleave', () => { autoTimer = setInterval(() => goTo(current + 1), 4000); });
+    });
+  }
+  initMachineSliders();
+
+  // ---- Scroll vers la grille "Solutions" (référencée par les boutons "Toutes les machines") ----
+  function scrollToAllMachines(){
+    const target = document.getElementById('solutions');
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   // ============================================
   // BARRE DE CONTACT — toggle mobile (bouton flottant)
   // ============================================
@@ -1700,7 +1748,6 @@ sliderWrap.addEventListener('mouseleave', () => { autoTimer = setInterval(() => 
         ? '<i class="fa-solid fa-xmark"></i>'
         : '<i class="fa-solid fa-headset"></i>';
     });
-    // referme la barre après le clic sur un lien (mobile)
     contactSidebar.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
       if (window.innerWidth <= 760) {
         contactSidebar.classList.remove('open');
@@ -1710,7 +1757,6 @@ sliderWrap.addEventListener('mouseleave', () => { autoTimer = setInterval(() => 
       }
     }));
   }
-
 
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
@@ -1759,42 +1805,41 @@ sliderWrap.addEventListener('mouseleave', () => { autoTimer = setInterval(() => 
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    
+
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
     const message = document.getElementById('message').value.trim();
-    
+
     if (!name || !email || !message) {
       alert('Veuillez remplir tous les champs.');
       return;
     }
-    
+
     const phoneNumber = '21290530911';
-    
-    const whatsappMessage = 
+
+    const whatsappMessage =
       '*Nouvelle demande de devis - RM MARK*%0A%0A' +
       '*Nom :* ' + encodeURIComponent(name) + '%0A' +
       '*E-mail :* ' + encodeURIComponent(email) + '%0A' +
       '*Message :*%0A' + encodeURIComponent(message) + '%0A%0A' +
       '---%0A' +
       'Envoyé depuis le site RM MARK';
-    
+
     const whatsappUrl = 'https://wa.me/' + phoneNumber + '?text=' + whatsappMessage;
-    
+
     window.open(whatsappUrl, '_blank');
-    
+
     success.classList.add('show');
     form.reset();
-    
+
     setTimeout(() => {
       success.classList.remove('show');
     }, 5000);
   });
+
   // ============================================
   // BLOC CONVERSION — MODALES DEVIS / VISITE
   // ============================================
-
-  // --- Ouverture / fermeture des modales ---
   function openModal(id){
     document.getElementById(id).classList.add('open');
     document.body.classList.add('modal-locked');
@@ -1803,7 +1848,6 @@ sliderWrap.addEventListener('mouseleave', () => { autoTimer = setInterval(() => 
     document.getElementById(id).classList.remove('open');
     document.body.classList.remove('modal-locked');
   }
-  // Fermer en cliquant sur l'overlay (hors de la boîte) ou avec Échap
   document.querySelectorAll('.modal-overlay').forEach(overlay => {
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) closeModal(overlay.id);
@@ -1815,13 +1859,9 @@ sliderWrap.addEventListener('mouseleave', () => { autoTimer = setInterval(() => 
     }
   });
 
-  // --- Numéro WhatsApp de l'entreprise (à adapter si besoin) ---
   const WHATSAPP_NUMBER = '212700181810';
-  // --- Adresse e-mail de réception (via FormSubmit.co, sans backend) ---
-  // NOTE : la 1ère soumission demandera une confirmation par e-mail de la part de FormSubmit.
   const NOTIFY_EMAIL = 'r.merouan@electrojet.ma';
 
-  // --- Validation générique d'un formulaire ---
   function validateForm(form){
     let valid = true;
     form.querySelectorAll('[required]').forEach(field => {
@@ -1844,7 +1884,6 @@ sliderWrap.addEventListener('mouseleave', () => { autoTimer = setInterval(() => 
     });
     return valid;
   }
-  // Nettoyer l'état d'erreur dès que l'utilisateur corrige un champ
   document.querySelectorAll('.modal-form input, .modal-form select, .modal-form textarea').forEach(field => {
     field.addEventListener('input', () => {
       field.classList.remove('invalid');
@@ -1853,7 +1892,6 @@ sliderWrap.addEventListener('mouseleave', () => { autoTimer = setInterval(() => 
     });
   });
 
-  // --- Envoi (email via FormSubmit + copie WhatsApp) puis affichage succès ---
   async function submitLead(form, whatsappTitle, successId, modalId){
     const data = Object.fromEntries(new FormData(form).entries());
     const submitBtn = form.querySelector('.modal-submit');
@@ -1861,7 +1899,6 @@ sliderWrap.addEventListener('mouseleave', () => { autoTimer = setInterval(() => 
     const originalHTML = submitBtn.innerHTML;
     submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Envoi en cours...';
 
-    // 1) Tentative d'envoi e-mail réel via FormSubmit (service tiers gratuit, sans backend)
     try {
       await fetch('https://formsubmit.co/ajax/' + NOTIFY_EMAIL, {
         method: 'POST',
@@ -1872,20 +1909,17 @@ sliderWrap.addEventListener('mouseleave', () => { autoTimer = setInterval(() => 
       console.warn('Envoi e-mail indisponible, poursuite via WhatsApp uniquement.', err);
     }
 
-    // 2) Construction et ouverture du message WhatsApp (copie / relais immédiat)
     let waText = '*' + whatsappTitle + '*%0A%0A';
     Object.entries(data).forEach(([key, value]) => {
       if (value) waText += '*' + key + ' :* ' + encodeURIComponent(value) + '%0A';
     });
     window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + waText, '_blank');
 
-    // 3) Affichage du message de succès
     form.style.display = 'none';
     document.getElementById(successId).classList.add('show');
     submitBtn.disabled = false;
     submitBtn.innerHTML = originalHTML;
 
-    // 4) Fermeture auto après quelques secondes + reset pour une prochaine ouverture propre
     setTimeout(() => {
       closeModal(modalId);
       setTimeout(() => {
@@ -1896,7 +1930,6 @@ sliderWrap.addEventListener('mouseleave', () => { autoTimer = setInterval(() => 
     }, 3500);
   }
 
-  // --- Formulaire Devis ---
   const formDevis = document.getElementById('formDevis');
   formDevis.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -1904,7 +1937,6 @@ sliderWrap.addEventListener('mouseleave', () => { autoTimer = setInterval(() => 
     submitLead(formDevis, 'Nouvelle demande de devis - RM MARK', 'successDevis', 'modalDevis');
   });
 
-  // --- Formulaire Visite commerciale ---
   const formVisite = document.getElementById('formVisite');
   formVisite.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -1912,47 +1944,43 @@ sliderWrap.addEventListener('mouseleave', () => { autoTimer = setInterval(() => 
     submitLead(formVisite, 'Nouvelle demande de visite commerciale - RM MARK', 'successVisite', 'modalVisite');
   });
 
-  /* APRÈS */
-document.querySelectorAll('.has-dropdown').forEach(item => {
-  let closeTimer = null;
+  // ============================================
+  // DROPDOWN "Products"
+  // ============================================
+  document.querySelectorAll('.has-dropdown').forEach(item => {
+    let closeTimer = null;
 
-  function openDropdown(){
-    clearTimeout(closeTimer);
-    item.classList.add('open');
-  }
-  function scheduleClose(){
-    clearTimeout(closeTimer);
-    closeTimer = setTimeout(() => item.classList.remove('open'), 350); // délai avant fermeture
-  }
-
-  // Desktop : ouverture au survol du lien OU du menu, fermeture différée à la sortie des deux
-  item.addEventListener('mouseenter', () => {
-    if (window.innerWidth > 760) openDropdown();
-  });
-  item.addEventListener('mouseleave', () => {
-    if (window.innerWidth > 760) scheduleClose();
-  });
-
-  // Mobile : ouverture/fermeture au clic
-  const trigger = item.querySelector('> a');
-  trigger.addEventListener('click', (e) => {
-    if (window.innerWidth <= 760) {
-      e.preventDefault();
-      item.classList.toggle('open');
+    function openDropdown(){
+      clearTimeout(closeTimer);
+      item.classList.add('open');
     }
+    function scheduleClose(){
+      clearTimeout(closeTimer);
+      closeTimer = setTimeout(() => item.classList.remove('open'), 350);
+    }
+
+    item.addEventListener('mouseenter', () => {
+      if (window.innerWidth > 760) openDropdown();
+    });
+    item.addEventListener('mouseleave', () => {
+      if (window.innerWidth > 760) scheduleClose();
+    });
+
+    const trigger = item.querySelector('> a');
+    trigger.addEventListener('click', (e) => {
+      if (window.innerWidth <= 760) {
+        e.preventDefault();
+        item.classList.toggle('open');
+      }
+    });
   });
-});
 
-// Ferme le menu si on clique ailleurs sur la page (desktop et mobile)
-document.addEventListener('click', (e) => {
-  document.querySelectorAll('.has-dropdown.open').forEach(item => {
-    if (!item.contains(e.target)) item.classList.remove('open');
+  document.addEventListener('click', (e) => {
+    document.querySelectorAll('.has-dropdown.open').forEach(item => {
+      if (!item.contains(e.target)) item.classList.remove('open');
+    });
   });
-});
 
-
-
-  
 </script>
 
 </body>
