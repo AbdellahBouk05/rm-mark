@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   ]);
   initHeaderBehavior();
   initSidebarBehavior();
+  document.querySelectorAll('#formDevis input[name="societe"]').forEach(input => {
+    if (!input.value) input.value = 'RM MARK';
+  });
 });
 
 function initHeaderBehavior(){

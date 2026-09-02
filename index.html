@@ -152,11 +152,13 @@
     background-size:cover; background-position:center;
     opacity:0;
     filter:brightness(1.05) saturate(0.9);
-    animation:heroBgFade 15s infinite;
+    animation:heroBgFade 25s infinite;
   }
-  .hero-bg .bg-layer:nth-child(1){background-image:url('/images/index/b1.jpg'); animation-delay:0s;}
-  .hero-bg .bg-layer:nth-child(2){background-image:url('/images/index/b2.jpg'); animation-delay:5s;}
-  .hero-bg .bg-layer:nth-child(3){background-image:url('/images/index/b3.png'); animation-delay:10s;}
+  .hero-bg .bg-layer:nth-child(1){background-image:url('/images/index/b1.png'); animation-delay:0s;}
+  .hero-bg .bg-layer:nth-child(2){background-image:url('/images/index/b2.jpg'); animation-delay:3s;}
+  .hero-bg .bg-layer:nth-child(3){background-image:url('/images/index/b3.png'); animation-delay:6s;}
+  .hero-bg .bg-layer:nth-child(4){background-image:url('/images/index/b4.jpg'); animation-delay:9s;}
+  .hero-bg .bg-layer:nth-child(5){background-image:url('/images/index/b5.jpg'); animation-delay:12s;}
   @keyframes heroBgFade{
     0%, 100%{opacity:0;}
     5%{opacity:1;}
@@ -166,7 +168,7 @@
   /* voile clair pour garder le texte lisible par-dessus les photos */
   .hero-bg::after{
     content:''; position:absolute; inset:0;
-    background:linear-gradient(100deg, rgba(246,249,252,.60) 0%, rgba(246,249,252,.60) 45%, rgba(246,249,252,.6) 100%);
+    background:linear-gradient(100deg, rgba(246,249,252,.60) 0%, rgba(246,249,252,.60) 0%, rgba(246,249,252,.6) 50%);
   }
 
   /* le hero passe en une seule colonne, plus de visuel latéral */
@@ -740,13 +742,16 @@
 <body>
   <!-- ===================== BARRE DE CONTACT VERTICALE ===================== -->
 <aside class="contact-sidebar" id="contactSidebar" aria-label="Contact rapide">
-  <a href="tel:+212700181810" aria-label="Téléphone">
+  <a href="tel:+212707181812" aria-label="Téléphone 0707181812">
     <i class="fa-solid fa-phone"></i><span class="tip">Téléphone</span>
+  </a>
+  <a href="tel:+212700181810" aria-label="Téléphone 0700181810">
+    <i class="fa-solid fa-phone"></i><span class="tip">Téléphone 0700181810</span>
   </a>
   <a href="mailto:r.merouan@electrojet.ma" aria-label="E-mail">
     <i class="fa-solid fa-envelope"></i><span class="tip">E-mail</span>
   </a>
-  <a href="https://wa.me/212700181810" class="whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <a href="https://wa.me/212707181812" class="whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">
     <i class="fa-brands fa-whatsapp"></i><span class="tip">WhatsApp</span>
   </a>
   <a href="#contact" aria-label="Formulaire de contact">
@@ -772,11 +777,6 @@
         <span class="b2">Coding &amp; Marking Services</span>
       </div>
     </a>
-
-    <div class="lang-switch">
-        <a href="#" data-lang="fr" onclick="setLang('fr'); return false;">FR</a>
-        <a href="#" data-lang="en" onclick="setLang('en'); return false;">EN</a>
-    </div>
 
     <ul class="nav-links" id="navLinks">
       <li><a href="#top">Accueil</a></li>
@@ -805,6 +805,8 @@
 <!-- ===================== HERO ===================== -->
 <section class="hero" id="top">
   <div class="hero-bg">
+    <div class="bg-layer"></div>
+    <div class="bg-layer"></div>
     <div class="bg-layer"></div>
     <div class="bg-layer"></div>
     <div class="bg-layer"></div>
@@ -1467,7 +1469,8 @@
           </div>
           <div class="contact-row">
             <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
-            <div><h4>Téléphone</h4><a href="tel:+212 703.18.18.12">+212 703.18.18.12</a></div>
+            <div><h4>Téléphone</h4><a href="tel:+212703181812">+212 703.18.18.12</a></div>
+            <div></div><a href="tel:+212700181810">+2127 00 18 18 10</a></div>
           </div>
         </div>
 
@@ -1525,6 +1528,7 @@
           <li><a href="mailto:r.merouan@electrojet.ma">r.merouan@electrojet.ma</a></li>
           <li><a href="mailto:h.elalaoui@electrojet.ma">h.elalaoui@electrojet.ma</a></li>
           <li><a href="tel:+212 703.18.18.12">+212 703.18.18.12</a></li>
+          <li><a href="tel:+212 700.18.18.10">+212 700.18.18.10</a></li>
           <li><a href="#">N°297 Lotissement Tissir 26200, Nouaceur Grand Casablanca</a></li>
         </ul>
       </div>
@@ -1556,7 +1560,7 @@
         </div>
         <div class="fgroup">
           <label>Société <span class="req">*</span></label>
-          <input type="text" name="societe" required>
+          <input type="text" name="societe" value="RM MARK" required>
           <span class="field-error">Merci d'indiquer votre société.</span>
         </div>
       </div>
@@ -1859,7 +1863,7 @@
     }
   });
 
-  const WHATSAPP_NUMBER = '212700181810';
+  const WHATSAPP_NUMBER = '212703181812';
   const NOTIFY_EMAIL = 'r.merouan@electrojet.ma';
 
   function validateForm(form){
