@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smartech CI8500 — Consommables | RM MARK</title>
+<meta name="description" content="Smartech CI8500 — Encre pour systèmes CIJ. Consultez le consommable et contactez RM MARK pour vérifier sa compatibilité avec votre imprimante et votre support.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/css/common.css">
+<style>
+
+   .modal-form input[readonly]{
+  background:var(--steel-white); color:var(--ink-blue); font-weight:600; cursor:default;
+  border-color:var(--line);
+}
+
+
+  /* ---- Bande d'accent en dégradé qui glisse, juste sous le header ---- */
+.top-accent-bar{
+  height:4px; width:100%;
+  background:linear-gradient(90deg, var(--ink-blue), var(--bright-blue), var(--signal-red), var(--ink-blue));
+  background-size:300% 100%;
+  animation:accentSlide 6s linear infinite;
+}
+@keyframes accentSlide{
+  0%{background-position:0% 0%;}
+  100%{background-position:300% 0%;}
+}
+
+/* ---------- MODALS ---------- */
+.modal-overlay{
+  position:fixed; inset:0; background:rgba(11,20,31,0.6); backdrop-filter:blur(3px);
+  display:none; align-items:center; justify-content:center; z-index:2000; padding:20px;
+}
+.modal-overlay.open{display:flex;}
+.modal-box{
+  background:var(--panel); border-radius:18px; width:100%; max-width:520px;
+  max-height:88vh; overflow-y:auto; box-shadow:var(--shadow-md); position:relative;
+  animation:modalIn .3s var(--ease);
+}
+@keyframes modalIn{ from{opacity:0; transform:translateY(18px) scale(.98);} to{opacity:1; transform:translateY(0) scale(1);} }
+.modal-head{padding:26px 30px 0; display:flex; justify-content:space-between; align-items:flex-start;}
+.modal-head h3{color:var(--ink-blue); font-size:1.3rem; margin-bottom:6px;}
+.modal-head p{color:var(--slate); font-size:.88rem;}
+.modal-close{
+  background:var(--steel-white); border:1px solid var(--line); width:34px; height:34px; border-radius:10px;
+  display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--slate); flex-shrink:0;
+  transition:background .2s, color .2s;
+}
+.modal-close:hover{background:var(--ink-blue); color:#fff;}
+.modal-form{padding:20px 30px 30px; display:flex; flex-direction:column; gap:14px;}
+.modal-form .frow{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+.modal-form .fgroup{display:flex; flex-direction:column; gap:5px;}
+.modal-form label{font-size:.8rem; color:var(--slate); font-weight:500;}
+.modal-form label .req{color:var(--signal-red);}
+.modal-form input, .modal-form select, .modal-form textarea{
+  padding:12px 14px; border-radius:9px; border:1px solid var(--line); font-family:inherit;
+  font-size:.92rem; background:var(--steel-white); color:var(--graphite); transition:border-color .2s, box-shadow .2s;
+}
+.modal-form input:focus, .modal-form select:focus, .modal-form textarea:focus{
+  outline:none; border-color:var(--circuit-blue); box-shadow:0 0 0 4px rgba(22,99,176,0.12);
+}
+.modal-form input.invalid, .modal-form select.invalid, .modal-form textarea.invalid{
+  border-color:var(--signal-red); box-shadow:0 0 0 4px rgba(230,57,70,0.1);
+}
+.field-error{font-size:.76rem; color:var(--signal-red); display:none;}
+.field-error.show{display:block;}
+.modal-form textarea{resize:vertical; min-height:80px;}
+.modal-submit{
+  background:var(--ink-blue); color:#fff; border:none; padding:14px 26px; border-radius:100px;
+  font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px;
+  transition:background .3s, transform .2s;
+}
+.modal-submit:hover{background:var(--circuit-blue); transform:translateY(-2px);}
+.modal-submit:disabled{opacity:.6; cursor:not-allowed; transform:none;}
+#modalVisite .modal-submit{background:var(--signal-red);}
+#modalVisite .modal-submit:hover{background:#c62a37;}
+.modal-success{
+  display:none; flex-direction:column; align-items:center; text-align:center; gap:10px; padding:40px 30px;
+}
+.modal-success.show{display:flex;}
+.modal-success i{font-size:2.6rem; color:#22a35c;}
+.modal-success h4{color:var(--ink-blue); font-size:1.15rem;}
+.modal-success p{color:var(--slate); font-size:.9rem;}
+body.modal-locked{overflow:hidden;}
+
+@media (max-width:560px){
+  .modal-form .frow{grid-template-columns:1fr;}
+}
+
+
+
+  body{ font-family:'Inter',sans-serif; color:var(--graphite); background:var(--steel-white); line-height:1.6; padding-top:78px; }
+  h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;}
+  a{text-decoration:none; color:inherit;}
+  .container{max-width:1180px; margin:0 auto; padding:0 24px;}
+
+  /* ---- Fil d'Ariane ---- */
+  .breadcrumb{padding:18px 0 0; font-size:.85rem; color:var(--slate);}
+  .breadcrumb a{color:var(--circuit-blue);}
+  .breadcrumb a:hover{text-decoration:underline;}
+
+  /* ---- Héros produit ---- */
+  .product-hero{padding:24px 0 50px; display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center;}
+  .product-hero .img-wrap{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:30px;
+    display:flex; align-items:center; justify-content:center; min-height:360px;
+  }
+  .product-hero .img-wrap img{max-width:100%; max-height:340px; object-fit:contain;}
+  
+                   /* APRÈS */
+                .product-hero .tag{
+                  font-family:'JetBrains Mono',monospace; font-size:.75rem; color:var(--signal-red); text-transform:uppercase;
+                  letter-spacing:.08em; font-weight:700; display:inline-flex; align-items:center; gap:8px;
+                  margin-bottom:14px; padding:6px 14px; border-radius:100px;
+                  background:rgba(230,57,70,0.08); border:1px solid rgba(230,57,70,0.2);
+                }
+                .product-hero .tag::before{
+                  content:''; width:7px; height:7px; border-radius:50%; background:var(--signal-red); flex-shrink:0;
+                  animation:tagPulse 1.8s infinite;
+                }
+                @keyframes tagPulse{
+                  0%,100%{opacity:1; box-shadow:0 0 0 0 rgba(230,57,70,.5);}
+                  50%{opacity:.4; box-shadow:0 0 0 6px rgba(230,57,70,0);}
+                }
+                .product-hero{position:relative;}
+.product-hero::before, .product-hero::after{
+  content:''; position:absolute; border-radius:50%; filter:blur(70px); opacity:.18; z-index:0; pointer-events:none;
+}
+.product-hero::before{
+  width:280px; height:280px; background:var(--bright-blue);
+  top:-40px; left:8%;
+  animation:floatBlob 9s ease-in-out infinite;
+}
+.product-hero::after{
+  width:220px; height:220px; background:var(--signal-red);
+  bottom:-30px; right:12%;
+  animation:floatBlob 11s ease-in-out infinite reverse;
+}
+@keyframes floatBlob{
+  0%,100%{ transform:translate(0,0) scale(1); }
+  50%{ transform:translate(18px,-16px) scale(1.1); }
+}
+.product-hero .img-wrap, .product-hero > div{position:relative; z-index:1;}
+ .product-hero .img-wrap{
+  transition:box-shadow .3s ease, transform .3s ease;
+}
+.product-hero .img-wrap:hover{
+  box-shadow:0 0 0 1px var(--bright-blue), 0 20px 40px rgba(22,99,176,0.15);
+  transform:translateY(-3px);
+}
+
+
+  .product-hero h1{font-size:clamp(1.8rem,3.4vw,2.5rem); color:var(--ink-blue); margin-bottom:16px;}
+  .product-hero p{color:var(--slate); font-size:1.02rem; margin-bottom:26px;}
+  .hero-actions{display:flex; gap:12px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:9px; padding:14px 24px; border-radius:100px;
+    font-weight:600; font-size:.9rem; cursor:pointer; border:none; transition:transform .2s, box-shadow .2s, background .2s;
+  }
+  .btn-primary{background:var(--ink-blue); color:#fff;}
+  .btn-primary:hover{background:var(--circuit-blue); transform:translateY(-2px); box-shadow:var(--shadow-md);}
+  .btn-outline{background:transparent; color:var(--ink-blue); border:1.5px solid var(--line);}
+  .btn-outline:hover{border-color:var(--ink-blue); transform:translateY(-2px);}
+
+  /* ---- Sections générales ---- */
+  .section{padding:50px 0;}
+  .section h2{font-size:1.5rem; color:var(--ink-blue); margin-bottom:18px;}
+  .section p{color:var(--slate); margin-bottom:14px;}
+
+  /* ---- Pourquoi choisir ---- */
+  .why-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px;}
+  .why-card{background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:22px;}
+  .why-card i{color:var(--circuit-blue); font-size:1.3rem; margin-bottom:10px; display:block;}
+  .why-card h4{font-size:1rem; color:var(--graphite); margin-bottom:6px;}
+  .why-card p{font-size:.88rem; margin:0;}
+
+  /* ---- Points techniques rapides ---- */
+  .quick-points{list-style:none; padding:0; display:grid; gap:10px;}
+  .quick-points li{
+    display:flex; gap:10px; align-items:flex-start; background:#fff; border:1px solid var(--line);
+    border-radius:10px; padding:14px 16px; font-size:.92rem; color:var(--graphite);
+  }
+  .quick-points i{color:#22a35c; margin-top:2px;}
+
+  /* ---- Vidéo + téléchargements ---- */
+  .media-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:22px;}
+  .video-card{
+    background:#000; border-radius:var(--radius); overflow:hidden; aspect-ratio:16/10;
+    position:relative; box-shadow:var(--shadow-sm);
+  }
+  .video-card iframe{width:100%; height:100%; border:0; display:block;}
+  .info-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+    padding:30px 20px; gap:14px;
+  }
+  .info-card .icon-circle{
+    width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.4rem;
+  }
+  .info-card.doc .icon-circle{background:rgba(22,99,176,0.1); color:var(--circuit-blue);}
+  .info-card.wa .icon-circle{background:rgba(37,211,102,0.12); color:#25D366;}
+  .info-card h4{color:var(--ink-blue); font-size:1.05rem;}
+  .info-card .btn{background:var(--ink-blue); color:#fff;}
+  .info-card.wa .btn{background:#25D366;}
+  .info-card .btn:hover{transform:translateY(-2px);}
+
+  /* ---- Applications & communication (texte + image) ---- */
+  .comm-section{display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center;}
+  .comm-section .img-wrap{display:flex; align-items:center; justify-content:center;}
+  .comm-section .img-wrap img{max-width:100%; max-height:420px; object-fit:contain;}
+  .comm-section h3{color:var(--ink-blue); font-size:1rem; margin-bottom:16px;}
+  .comm-section h4{color:var(--graphite); font-size:.95rem; margin-bottom:8px; margin-top:18px;}
+  .comm-section p{color:var(--slate); font-size:.92rem;}
+
+  /* ---- Tags applications / supports ---- */
+  .tags-wrap{display:flex; flex-wrap:wrap; gap:9px;}
+  .tags-wrap span{
+    background:#fff; border:1px solid var(--line); color:var(--slate); font-size:.82rem;
+    padding:8px 14px; border-radius:100px;
+  }
+
+  /* ---- Tableau specs ---- */
+  .specs-table{width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;}
+  .specs-table tr{border-bottom:1px solid var(--line);}
+  .specs-table tr:last-child{border-bottom:none;}
+  .specs-table td{padding:13px 18px; font-size:.9rem;}
+  .specs-table td:first-child{color:var(--slate); font-weight:600; width:38%; background:var(--steel-white);}
+  .specs-table td:last-child{color:var(--graphite);}
+
+  /* ---- Galerie ---- */
+  .gallery-tag{
+    display:inline-block; background:rgba(22,99,176,0.08); color:var(--circuit-blue); font-size:.78rem;
+    font-weight:700; padding:6px 14px; border-radius:100px; margin-bottom:20px;
+  }
+  .gallery-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  .gallery-grid img{
+    width:100%; aspect-ratio:1/1; object-fit:contain; background:#fff; border:1px solid var(--line);
+    border-radius:10px; padding:10px; cursor:pointer; transition:transform .25s, box-shadow .25s;
+  }
+  .gallery-grid img:hover{transform:translateY(-4px); box-shadow:var(--shadow-md);}
+
+  .lightbox{
+    position:fixed; inset:0; background:rgba(11,20,31,0.88); z-index:3000; display:none;
+    align-items:center; justify-content:center; padding:30px;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox img{max-width:90vw; max-height:85vh; border-radius:10px;}
+  .lightbox-close{
+    position:absolute; top:24px; right:28px; width:44px; height:44px; border-radius:50%;
+    background:rgba(255,255,255,.12); color:#fff; border:none; font-size:1.2rem; cursor:pointer;
+  }
+
+  /* ---- CTA final ---- */
+  .cta-final{
+    background:linear-gradient(135deg,var(--ink-blue),#08315C); border-radius:24px; padding:50px;
+    color:#fff; text-align:center;
+  }
+  .cta-final h2{color:#fff; margin-bottom:10px;}
+  .cta-final p{color:rgba(255,255,255,.82); margin-bottom:24px;}
+  .cta-final .hero-actions{justify-content:center;}
+  .cta-final .btn-outline{color:#fff; border-color:rgba(255,255,255,.35);}
+  .cta-final .btn-outline:hover{border-color:#fff;}
+
+  /* ---- Autres machines ---- */
+  .related-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:20px;}
+  .related-card{
+    display:flex; gap:16px; align-items:center; background:#fff; border:1px solid var(--line);
+    border-radius:var(--radius); padding:16px; transition:transform .25s, box-shadow .25s;
+  }
+  .related-card:hover{transform:translateY(-4px); box-shadow:var(--shadow-md);}
+  .related-card img{width:80px; height:80px; object-fit:contain; background:var(--steel-white); border-radius:10px; padding:8px;}
+  .related-card h4{color:var(--ink-blue); font-size:.95rem; margin-bottom:4px;}
+  .related-card p{color:var(--slate); font-size:.8rem; margin:0;}
+
+  footer{background:var(--graphite); color:#B9C2CC; padding:34px 0; text-align:center; font-size:.82rem; margin-top:30px;}
+
+  @media (max-width:900px){
+    .product-hero, .comm-section, .why-grid, .media-grid, .related-grid{grid-template-columns:1fr;}
+    .gallery-grid{grid-template-columns:repeat(2,1fr);}
+  }
+.gallery-item{border:0;background:none;padding:0;cursor:pointer}.gallery-item:focus-visible{outline:3px solid var(--circuit-blue);outline-offset:4px}.gallery-item img{height:100%;}.submit-error{color:#b42318}.media-grid{grid-template-columns:repeat(2,1fr)}@media(max-width:900px){.media-grid{grid-template-columns:1fr}} .specs-table th{text-align:left;padding:13px 18px;background:var(--steel-white);color:var(--slate);width:38%}.specs-table td,.specs-table th{overflow-wrap:anywhere} [hidden]{display:none!important}.doc-path{overflow-wrap:anywhere}.product-photo{width:100%;max-height:380px;object-fit:contain} </style>
+</head>
+<body><div id="site-sidebar"></div><div id="site-header"></div><div class="top-accent-bar"></div><main>
+<div class="container"><nav class="breadcrumb" aria-label="Fil d’Ariane"><a href="/index.html#top">Accueil</a> / <a href="/products/l5/l5.html">Consommables</a> / Smartech CI8500</nav></div>
+<div class="container"><div class="product-hero"><div class="img-wrap"><img src="/images/products/l5-consumable/CI8500/CI8500.jpg" alt="Smartech CI8500 — Encre pour systèmes CIJ"></div><div><span class="tag">Consommables RM MARK</span><h1>Smartech CI8500</h1><p>Smartech CI8500 — Encre pour systèmes CIJ. Consultez le consommable et contactez RM MARK pour vérifier sa compatibilité avec votre imprimante et votre support.</p><div class="hero-actions"><button class="btn btn-primary" onclick="openModal('modalDevis')">Demander un devis</button><button class="btn btn-outline" onclick="openModal('modalVisite')">Demander un conseil</button></div></div></div></div>
+<section class="section"><div class="container"><h2>Présentation du consommable</h2><table class="specs-table"><tbody><tr><td>Référence</td><td>Smartech CI8500</td></tr><tr><td>Famille indiquée au catalogue</td><td>Encre pour systèmes CIJ</td></tr><tr><td>Compatibilité</td><td>À confirmer selon l’imprimante, le support et les conditions d’utilisation.</td></tr></tbody></table></div></section>
+<section class="section"><div class="container"><div class="comm-section"><div><h2>Choisir le consommable adapté</h2><p>Communiquez le modèle exact de votre imprimante et la référence du consommable utilisé actuellement. Notre équipe pourra étudier votre demande.</p><h3>Informations utiles pour votre devis</h3><ul><li>Marque et modèle de l’imprimante.</li><li>Référence de l’encre ou de la cartouche utilisée.</li><li>Nature du support et exemple du marquage souhaité.</li><li>Quantité et fréquence de consommation.</li><li>Contraintes de votre environnement de production.</li></ul><p>Les conditions de stockage, d’utilisation et de manipulation doivent être vérifiées dans les documents du fabricant avant emploi.</p></div><div class="img-wrap"><img src="/images/products/l5-consumable/CI8500/CI8500.jpg" alt="Consommable Smartech CI8500" loading="lazy"></div></div></div></section>
+<section class="section"><div class="container"><h2>Documentation</h2><div class="info-card doc"><div class="icon-circle"><i class="fa-solid fa-file-lines"></i></div><h4>Fiche technique Smartech CI8500</h4><p id="pdfPending">La fiche technique sera disponible prochainement. Contactez RM MARK pour obtenir les informations nécessaires.</p><a class="btn" href="/documents/l5/ci8500.pdf" data-pdf="/documents/l5/ci8500.pdf" download hidden>Télécharger la fiche technique</a><a class="btn-outline" href="https://wa.me/212700181810?text=Bonjour%2C%20je%20souhaite%20la%20documentation%20du%20consommable%20Smartech%20CI8500" target="_blank" rel="noopener">Demander la documentation</a></div></div></section>
+<section class="section"><div class="container"><div class="cta-final"><h2>Besoin de Smartech CI8500 ?</h2><p>Précisez votre équipement et la quantité souhaitée pour préparer votre demande.</p><div class="hero-actions"><button class="btn btn-primary" onclick="openModal('modalDevis')">Demander un devis</button><a href="/products/l5/l5.html" class="btn btn-outline">Tous les consommables</a></div></div></div></section>
+<section class="section"><div class="container"><h2>Autres consommables</h2><div class="related-grid"><a href="/products/l5/2705.html" class="related-card"><img src="/images/products/l5-consumable/2705/2705.jpg" alt="Solujet 2705B" loading="lazy"><div><h4>Solujet 2705B</h4><p>Encre à base de solvant</p></div></a>
+<a href="/products/l5/2707K.html" class="related-card"><img src="/images/products/l5-consumable/2707K/2707K.jpg" alt="Solujet 2707K" loading="lazy"><div><h4>Solujet 2707K</h4><p>Encre noire à base de solvant</p></div></a>
+<a href="/products/l5/2707R.html" class="related-card"><img src="/images/products/l5-consumable/2707R/2707R.jpg" alt="Solujet 2707R" loading="lazy"><div><h4>Solujet 2707R</h4><p>Encre rouge à base de solvant</p></div></a>
+<a href="/products/l5/2770.html" class="related-card"><img src="/images/products/l5-consumable/2770/2770.jpg" alt="Hydarajet 2770" loading="lazy"><div><h4>Hydarajet 2770</h4><p>Encre à base d’eau</p></div></a>
+<a href="/products/l5/2780.html" class="related-card"><img src="/images/products/l5-consumable/2780/2780.jpg" alt="Hydarajet 2780" loading="lazy"><div><h4>Hydarajet 2780</h4><p>Encre à base d’eau</p></div></a>
+<a href="/products/l5/3770K.html" class="related-card"><img src="/images/products/l5-consumable/3770K/3770K.jpg" alt="Smartech 3770K" loading="lazy"><div><h4>Smartech 3770K</h4><p>Encre pigmentée</p></div></a></div></div></section></main><footer>
+  <div class="container">&copy; <span id="year"></span> RM MARK — Coding &amp; Marking Services. Tous droits réservés.</div>
+</footer>
+
+<!-- ===== LIGHTBOX GALERIE ===== -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" aria-label="Fermer l’image" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
+  <img id="lightboxImg" src="" alt="Aperçu">
+</div>
+
+<!-- ===== MODALES DEVIS / VISITE (identiques à index.html) ===== -->
+<div class="modal-overlay" id="modalDevis">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <h3>Demande de devis</h3>
+        <p>Remplissez ce formulaire, notre équipe vous recontacte sous 24 à 48h.</p>
+      </div>
+      <div class="modal-close" onclick="closeModal('modalDevis')"><i class="fa-solid fa-xmark"></i></div>
+    </div>
+    <form class="modal-form" id="formDevis" novalidate>
+      <div class="frow">
+        <div class="fgroup">
+          <label>Nom complet <span class="req">*</span></label>
+          <input type="text" name="nom" required>
+          <span class="field-error">Merci d'indiquer votre nom.</span>
+        </div>
+        <div class="fgroup">
+          <label>Société <span class="req">*</span></label>
+          <input type="text" name="societe" required>
+          <span class="field-error">Merci d'indiquer votre société.</span>
+        </div>
+      </div>
+      <div class="frow">
+        <div class="fgroup">
+          <label>E-mail <span class="req">*</span></label>
+          <input type="email" name="email" required>
+          <span class="field-error">E-mail invalide.</span>
+        </div>
+        <div class="fgroup">
+          <label>Téléphone <span class="req">*</span></label>
+          <input type="tel" name="telephone" required>
+          <span class="field-error">Merci d'indiquer un téléphone.</span>
+        </div>
+      </div>
+      <div class="frow">
+        <div class="fgroup">
+          <label>Machine concernée</label>
+          <input type="text" id="machineDisplay" value="Smartech CI8500 — Encre pour systèmes CIJ" readonly>
+          <input type="hidden" name="typeBesoin" id="machineHidden" value="Smartech CI8500 — Encre pour systèmes CIJ">
+        </div>
+        <div class="fgroup">
+          <label>Quantité éventuelle</label>
+          <input type="text" name="quantite" placeholder="ex : 2 imprimantes...">
+        </div>
+      </div>
+      <div class="fgroup">
+        <label>Message <span class="req">*</span></label>
+        <textarea name="message" rows="3" required placeholder="Décrivez votre besoin..."></textarea>
+        <span class="field-error">Merci de décrire votre besoin.</span>
+      </div>
+      <button type="submit" class="modal-submit"><i class="fa-solid fa-paper-plane"></i> Envoyer ma demande de devis</button>
+    </form>
+    <div class="modal-success" id="successDevis">
+      <i class="fa-solid fa-circle-check"></i>
+      <h4>Demande envoyée !</h4>
+      <p>Merci, votre demande de devis a bien été transmise.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalVisite">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <h3>Demande de visite commerciale</h3>
+        <p>Un technico-commercial RM MARK se déplace sur site.</p>
+      </div>
+      <div class="modal-close" onclick="closeModal('modalVisite')"><i class="fa-solid fa-xmark"></i></div>
+    </div>
+    <form class="modal-form" id="formVisite" novalidate>
+      <div class="frow">
+        <div class="fgroup">
+          <label>Nom complet <span class="req">*</span></label>
+          <input type="text" name="nom" required>
+          <span class="field-error">Merci d'indiquer votre nom.</span>
+        </div>
+        <div class="fgroup">
+          <label>Société <span class="req">*</span></label>
+          <input type="text" name="societe" required>
+          <span class="field-error">Merci d'indiquer votre société.</span>
+        </div>
+      </div>
+      <div class="frow">
+        <div class="fgroup">
+          <label>E-mail <span class="req">*</span></label>
+          <input type="email" name="email" required>
+          <span class="field-error">E-mail invalide.</span>
+        </div>
+        <div class="fgroup">
+          <label>Téléphone <span class="req">*</span></label>
+          <input type="tel" name="telephone" required>
+          <span class="field-error">Merci d'indiquer un téléphone.</span>
+        </div>
+      </div>
+      <div class="fgroup">
+        <label>Adresse du site à visiter <span class="req">*</span></label>
+        <input type="text" name="adresse" required>
+        <span class="field-error">Merci d'indiquer l'adresse du site.</span>
+      </div>
+      <div class="frow">
+        <div class="fgroup">
+          <label>Date souhaitée <span class="req">*</span></label>
+          <input type="date" name="date" required>
+          <span class="field-error">Merci de choisir une date.</span>
+        </div>
+        <div class="fgroup">
+          <label>Créneau préféré</label>
+          <select name="creneau">
+            <option value="">Indifférent</option>
+            <option>Matin</option>
+            <option>Après-midi</option>
+          </select>
+        </div>
+      </div>
+      <div class="fgroup">
+        <label>Message</label>
+        <textarea name="message" rows="3"></textarea>
+      </div>
+      <button type="submit" class="modal-submit"><i class="fa-solid fa-calendar-check"></i> Envoyer ma demande de visite</button>
+    </form>
+    <div class="modal-success" id="successVisite">
+      <i class="fa-solid fa-circle-check"></i><h4>Demande envoyée !</h4>
+      <p>Merci, votre demande de visite a bien été transmise.</p>
+    </div>
+  </div>
+</div>
+
+<script src="/js/common.js" defer></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ---- Modales ----
+  function openModal(id){
+    document.getElementById(id).classList.add('open');
+    document.body.classList.add('modal-locked');
+  }
+  function closeModal(id){
+    document.getElementById(id).classList.remove('open');
+    document.body.classList.remove('modal-locked');
+  }
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(overlay.id); });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { document.querySelectorAll('.modal-overlay.open').forEach(o => closeModal(o.id)); closeLightbox(); }
+  });
+
+  const WHATSAPP_NUMBER = '212703181812';
+  const NOTIFY_EMAIL = 'r.merouan@electrojet.ma';
+
+  function validateForm(form){
+    let valid = true;
+    form.querySelectorAll('[required]').forEach(field => {
+      const errorEl = field.parentElement.querySelector('.field-error');
+      let fieldValid = field.value.trim() !== '';
+      if (field.type === 'email' && fieldValid) fieldValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value.trim());
+      if (field.type === 'tel' && fieldValid) fieldValid = field.value.trim().replace(/[^0-9+]/g,'').length >= 8;
+      if (!fieldValid) { valid = false; field.classList.add('invalid'); if (errorEl) errorEl.classList.add('show'); }
+      else { field.classList.remove('invalid'); if (errorEl) errorEl.classList.remove('show'); }
+    });
+    return valid;
+  }
+  document.querySelectorAll('.modal-form input, .modal-form select, .modal-form textarea').forEach(field => {
+    field.addEventListener('input', () => {
+      field.classList.remove('invalid');
+      const errorEl = field.parentElement.querySelector('.field-error');
+      if (errorEl) errorEl.classList.remove('show');
+    });
+  });
+
+  async function submitLead(form, title, successId, modalId){
+    const data = Object.fromEntries(new FormData(form).entries());
+    const submitBtn = form.querySelector('.modal-submit');
+    submitBtn.disabled = true;
+    const originalHTML = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Envoi en cours...';
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/' + NOTIFY_EMAIL, {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ _subject: title, ...data })
+      });
+      const result = await response.json();
+      if (!response.ok || result.success === false || result.success === 'false') throw new Error('Envoi indisponible');
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalHTML;
+      let error = form.querySelector('.submit-error');
+      if (!error) { error = document.createElement('p'); error.className = 'submit-error'; error.setAttribute('role', 'alert'); form.append(error); }
+      error.textContent = "Votre demande n’a pas pu être envoyée. Réessayez ou contactez-nous par WhatsApp.";
+      return;
+    }
+    form.querySelector('.submit-error')?.remove();
+    let waText = '*' + title + '*%0A%0A';
+    Object.entries(data).forEach(([key, value]) => { if (value) waText += '*' + key + ' :* ' + encodeURIComponent(value) + '%0A'; });
+    window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + waText, '_blank');
+    form.style.display = 'none';
+    document.getElementById(successId).classList.add('show');
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalHTML;
+    setTimeout(() => {
+      closeModal(modalId);
+      setTimeout(() => { form.reset(); form.style.display = 'flex'; document.getElementById(successId).classList.remove('show'); }, 400);
+    }, 3500);
+  }
+
+  document.getElementById('formDevis').addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!validateForm(e.target)) return;
+    submitLead(e.target, 'Nouvelle demande de devis - Smartech CI8500 - RM MARK', 'successDevis', 'modalDevis');
+  });
+  document.getElementById('formVisite').addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!validateForm(e.target)) return;
+    submitLead(e.target, 'Nouvelle demande de visite - Smartech CI8500 - RM MARK', 'successVisite', 'modalVisite');
+  });
+
+  // Le téléchargement est proposé dès que le PDF prévu est disponible.
+  document.querySelectorAll('[data-pdf]').forEach(async link => {
+    try {
+      const response = await fetch(link.dataset.pdf, { method: 'HEAD' });
+      if (response.ok && (response.headers.get('Content-Type') || '').toLowerCase().includes('application/pdf')) {
+        link.hidden = false;
+        document.getElementById('pdfPending').hidden = true;
+      }
+    } catch (_) { /* La demande de documentation reste disponible. */ }
+  });
+  // ---- Galerie / Lightbox ----
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  document.querySelectorAll('#galleryGrid button').forEach(button => {
+    const img = button.querySelector('img');
+    button.addEventListener('click', () => {
+      lightboxImg.src = img.src; lightboxImg.alt = img.alt;
+      lightbox.classList.add('open');
+    });
+  });
+  function closeLightbox(){ lightbox.classList.remove('open'); }
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+</script>
+</body>
+</html>
